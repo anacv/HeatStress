@@ -1,0 +1,18 @@
+#' Calculate the atmospheric emissivity.
+#' 
+#' Calculate the atmospheric emissivity.
+#' 
+#' @param Tk: value of air temperature in Kelvin.
+#' @param RH: value of relative humidity in fraction.
+#' 
+#' @return atmospheric emissivity.
+#' 
+#' @author Ana Casanueva (05.01.2017).
+#' @details Reference: Oke (2nd edition), page 373.
+
+
+emis_atm <- function(Tk, RH){
+  e <- RH * esat(Tk)
+  emis_atm <- 0.575 * e ^ 0.143
+  return(emis_atm)
+}
