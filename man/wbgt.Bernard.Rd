@@ -29,11 +29,11 @@ Based on Lemke and Kjellstrom 2012, using the formulation from Bernard et al. 19
 \examples{
 \dontrun{
 # load the meteorological variables for example data in Salamanca:
-data("eca_salam_jja_2003.Rdata")
+data(eca_salam_jja_2003.Rdata)
 wbgt.indoors <- wbgt.Bernard(eca_salam_jja_2003$tasmean, eca_salam_jja_2003$dewp)
 }
 }
 \author{
-A.Casanueva (24.10.2016).
+A.Casanueva, P. Noti (21.02.2017).
 }
 
