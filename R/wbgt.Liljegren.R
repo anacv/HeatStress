@@ -9,13 +9,14 @@
 #' @param dates: vector with dates in format yyyy-mm-dd H:M:S, same length as the other inputs. If format yyyy-mm-dd is provided, the default hour is 12:00:00.
 #' @param lon: value for the longitude of the location.
 #' @param lat: value for the latitude of the location.
-#' @param tolerance (optional): tolerance value for the iteration. Default: 1e-6
+#' @param tolerance (optional): tolerance value for the iteration. Default: 1e-4
+#' @param noNAs: logical, should \code{tas >= dewp} be enforced by swapping?
 #' 
 #' @return A list of:
-#' @return $value: wet bulb globe temperature in degC
-#' @return $tnwb: natural wet bulb temperature (Tnwb) in degC
-#' @return $tg: globe temperature in degC
-#' @author A.Casanueva (17.01.2017).
+#' @return $data: wet bulb globe temperature in degC
+#' @return $Tnwb: natural wet bulb temperature (Tnwb) in degC
+#' @return $Tg: globe temperature in degC
+#' @author A.Casanueva (21.02.2017).
 #' @details This corresponds to the implementation for outdoors or in the sun conditions. Original fortran code by James C. Liljegren, translated by Bruno Lemke into Visual Basic (VBA) and Ana Casanueva into R.
 #' @export
 #' 
@@ -26,63 +27,61 @@
 #' }
 #' 
 
-
-
-wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, tolerance=1e-6){
+wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, tolerance=1e-4, noNAs=FALSE){
   
-
   ##################################################
   ##################################################
   # Assumptions
   propDirect <- 0.8  # Assume a proportion of direct radiation = direct/(diffuse + direct)
   Pair <- 1010  # Atmospheric pressure in hPa
   MinWindSpeed <- 0.1   # 0 wind speed upsets log function
-  
-  
   ######################
   ######################
+  
   ndates <- length(tas)
   Tnwb <- rep(NA, ndates)
   Tg <- rep(NA, ndates)
-  WBGTo <- rep(NA, ndates)
-  wbgt <- list()
   
   # Filter data to calculate the WBGT with optimization function
   xmask <- !is.na(tas + dewp + wind + radiation)
   
+  # Swap temperature and dewpoint if necessary
+  if (noNAs){
+    tastmp <- pmax(tas, dewp)
+    dewp <- pmin(tas, dewp)
+    tas <- tastmp
+  } else {
+    xmask <- xmask & tas >= dewp
+  }
+  
+  # Calculate relative humidity from air temperature and dew point temperature
+  relh <- dewp2hurs(tas,dewp) # input in degC, output in %
+  
+  # **************************************
+  # *** Calculation of the Tg and Tnwb ***
+  # **************************************
   for (i in which(xmask)){
-    # if dewp>tas, use dewp for tas and viceversa
-    Ta <- max(tas[i], dewp[i])
-    Td <- min(tas[i], dewp[i])
-    ws <- wind[i]
-    solar <- radiation[i]
-    date <- dates[i]
-
-        
+         
     # Calculate zenith angle (radians are needed)
-    zenithDeg <- calZenith(date, lon, lat)
+    zenithDeg <- calZenith(dates[i], lon, lat)
     ZenithAngle <- degToRad(zenithDeg)
-    
-    # Calculate relative humidity from air temperature and dew point temperature
-    relh <- dewp2hurs(Ta,Td) # input in degC, output in %
-        
+   
     # Calculate globe temperature
-    Tg[i] <- fTg(Ta, relh, Pair, ws, MinWindSpeed, solar, propDirect, ZenithAngle)
+    Tg[i] <- fTg(tas[i], relh[i], Pair, wind[i], MinWindSpeed, radiation[i], propDirect, ZenithAngle)
     
     # Calculate natural wet bulb temperature
-    Tnwb[i] <- fTnwb(Ta, Td, relh, Pair, ws, MinWindSpeed, solar, propDirect, ZenithAngle)
+    Tnwb[i] <- fTnwb(tas[i], dewp[i], relh[i], Pair, wind[i], MinWindSpeed, radiation[i], propDirect, ZenithAngle)
         
-    # Calculate WBGT outdoors/in the sun
-    WBGTo[i] <- 0.7 * Tnwb[i] + 0.2 * Tg[i] + 0.1 * Ta
-    
-    rm(relh)
+    rm(zenithDeg, ZenithAngle)
  
   }
   
-  wbgt$value <- WBGTo
-  wbgt$tnwb <- Tnwb
-  wbgt$tg <- Tg
-        
-      
+  # *******************************
+  # *** Calculation of the WBGT ***
+  # *******************************
+  wbgt <- list(data = 0.7 * Tnwb + 0.2 * Tg + 0.1 * tas, 
+               Tnwb = Tnwb,
+               Tg = Tg)
+  
   return(wbgt)
 }

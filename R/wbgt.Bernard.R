@@ -8,9 +8,9 @@
 #' @param noNAs: logical, should \code{tas >= dewp} be enforced by swapping?
 #' 
 #' @return A list of:
-#' @return $value: wet bulb globe temperature in degC.
-#' @return $tpwb: phychrometric wet bulb temperature (Tpwb) in degC.
-#' @author A.Casanueva, P. Noti (21.02.2017).
+#' @return $data: wet bulb globe temperature in degC.
+#' @return $Tpwb: phychrometric wet bulb temperature (Tpwb) in degC.
+#' @author A.Casanueva, P. Noti, J. Bhend (21.02.2017).
 #' @details Based on Lemke and Kjellstrom 2012, using the formulation from Bernard et al. 1999.
 #' @export
 #' 

@@ -1,4 +1,4 @@
 Changes in version 1.0.1
   * Added option for enforcing tas >= dewpoint
-  * Rearranged code in `wbgt.Bernard` to improve performance
-  * Changed default tolerance to 1e-4 in `wbgt.Bernard`
+  * Rearranged code in `wbgt.Bernard` and `wbgt.Liljegren` to improve performance
+  * Changed default tolerance to 1e-4 in `wbgt.Bernard` and `wbgt.Liljegren`

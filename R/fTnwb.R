@@ -12,7 +12,7 @@
 #' @param zenith: zenith angle in radians.
 #' @param irad (optional): include radiation (1) or not (irad=0, psychrometric web bulb temp). Default: 1.
 #' @param SurfAlbedo (optional): albedo in the surface. Default: 0.4.
-#' @param tolerance (optional): tolerance value for the iteration. Default: 1e-6.
+#' @param tolerance (optional): tolerance value for the iteration. Default: 1e-4.
 #' 
 #' @return Natural wet bulb globe temperature in degC.
 #' @author Ana Casanueva (05.01.2017).
@@ -22,7 +22,7 @@
 
 
 
-fTnwb <- function(Ta, Td, relh, Pair, ws, min.speed, solar, propDirect, zenith, irad=1, SurfAlbedo=0.4, tolerance=1e-6){
+fTnwb <- function(Ta, Td, relh, Pair, ws, min.speed, solar, propDirect, zenith, irad=1, SurfAlbedo=0.4, tolerance=1e-4){
   
   # Physical constants
   stefanb <- 0.000000056696

@@ -11,7 +11,7 @@
 #' @param propDirect: proportion of direct radiation = direct/(diffuse + direct).
 #' @param zenith: zenith angle in radians.
 #' @param SurfAlbedo (optional): albedo in the surface. Default: 0.4.
-#' @param tolerance (optional): tolerance value for the iteration. Default: 1e-6.
+#' @param tolerance (optional): tolerance value for the iteration. Default: 1e-4.
 #' 
 #' @return Globe temperature in degC.
 #' 
@@ -21,7 +21,7 @@
 #' 
 
 
-fTg <- function(Ta, relh, Pair, ws, min.speed, solar, propDirect, zenith, SurfAlbedo=0.4, tolerance=1e-6){
+fTg <- function(Ta, relh, Pair, ws, min.speed, solar, propDirect, zenith, SurfAlbedo=0.4, tolerance=1e-4){
   
   # Physical constants
   stefanb <- 0.000000056696
