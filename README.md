@@ -1,2 +1,2 @@
 # HeatStress
-Heat Stress indicator for HeatShield
+Heat Stress indices for Heat-Shield
