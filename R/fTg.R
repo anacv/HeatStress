@@ -71,7 +71,7 @@ fTg <- function(Ta, relh, Pair, ws, min.speed, solar, propDirect, zenith, SurfAl
   }
   
   # Minimization (iteratively)
-  opt <- optimize(fr, c(Tglobe_prev-20, Tglobe_prev+20),Tair,Pair, tol=tolerance)
+  opt <- optimize(fr, range(Tair-1, Tglobe_prev+20),Tair,Pair, tol=tolerance)
   
   Tg <- opt$minimum - 273.15
   

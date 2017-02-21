@@ -13,7 +13,7 @@
 #' 
 #' @return A list of:
 #' @return $value: wet bulb globe temperature in degC
-#' @return $tnwb: natural wet bulb temperature (Tpwb) in degC
+#' @return $tnwb: natural wet bulb temperature (Tnwb) in degC
 #' @return $tg: globe temperature in degC
 #' @author A.Casanueva (17.01.2017).
 #' @details This corresponds to the implementation for outdoors or in the sun conditions. Original fortran code by James C. Liljegren, translated by Bruno Lemke into Visual Basic (VBA) and Ana Casanueva into R.
@@ -21,7 +21,7 @@
 #' 
 #' @examples \dontrun{ 
 #' # load the meteorological variables for example data in Salamanca:
-#' data("eca_salam_jja_2003.Rdata") 
+#' data(eca_salam_jja_2003.Rdata) 
 #' wbgt.outdoors <- wbgt.Liljegren(eca_salam_jja_2003$tasmean, eca_salam_jja_2003$dewp, eca_salam_jja_2003$wind, eca_salam_jja_2003$solar, eca_salam_jja_2003$Dates, -5.66, 40.96)
 #' }
 #' 
@@ -42,52 +42,47 @@ wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, toleranc
   ######################
   ######################
   ndates <- length(tas)
-  Tpwb <- rep(NA, ndates)
-  data <- rep(NA, ndates)
-  wbgt <- NULL
+  Tnwb <- rep(NA, ndates)
+  Tg <- rep(NA, ndates)
+  WBGTo <- rep(NA, ndates)
+  wbgt <- list()
   
-  for (i in 1:ndates){
-    Ta <- tas[i]
-    Td <- dewp[i]
+  # Filter data to calculate the WBGT with optimization function
+  xmask <- !is.na(tas + dewp + wind + radiation)
+  
+  for (i in which(xmask)){
+    # if dewp>tas, use dewp for tas and viceversa
+    Ta <- max(tas[i], dewp[i])
+    Td <- min(tas[i], dewp[i])
     ws <- wind[i]
     solar <- radiation[i]
     date <- dates[i]
+
+        
+    # Calculate zenith angle (radians are needed)
+    zenithDeg <- calZenith(date, lon, lat)
+    ZenithAngle <- degToRad(zenithDeg)
     
-    # nlm does not ignore NA
-    if (!is.na(Ta) & !is.na(Td) & !is.na(ws) & !is.na(solar)){
-      
-      # Check to make sure Td < Ta
-      if((Td-Ta)>0.1) {
-        print("Warning: Dew point temperature larger than air temperature, result set to NA")
-        wbgt$value[i]<- NA; wbgt$tnwb[i]<- NA; wbgt$tg[i]<- NA
-      } else{
+    # Calculate relative humidity from air temperature and dew point temperature
+    relh <- dewp2hurs(Ta,Td) # input in degC, output in %
         
-        # Calculate zenith angle (radians are needed)
-        zenithDeg <- calZenith(date, lon, lat)
-        ZenithAngle <- degToRad(zenithDeg)
-        
-        # Calculate relative humidity from air temperature and dew point temperature
-        relh <- dewp2hurs(Ta,Td) # input in degC, output in %
-        
-        # Calculate globe temperature
-        Tg <- fTg(Ta, relh, Pair, ws, MinWindSpeed, solar, propDirect, ZenithAngle)
-        
-        # Calculate natural wet bulb temperature
-        Tnwb <- fTnwb(Ta, Td, relh, Pair, ws, MinWindSpeed, solar, propDirect, ZenithAngle)
-        
-        # Calculate WBGT outdoors/in the sun
-        WBGTo <- 0.7 * Tnwb + 0.2 * Tg + 0.1 * Ta
-        
-        wbgt$value[i] <- WBGTo
-        wbgt$tnwb[i] <- Tnwb
-        wbgt$tg[i] <- Tg
-        
-        rm(WBGTo, Tnwb, Tg, relh)
-      }
-      
-    } else{wbgt$value[i]<- NA; wbgt$tnwb[i]<- NA; wbgt$tg[i]<- NA}
+    # Calculate globe temperature
+    Tg[i] <- fTg(Ta, relh, Pair, ws, MinWindSpeed, solar, propDirect, ZenithAngle)
     
+    # Calculate natural wet bulb temperature
+    Tnwb[i] <- fTnwb(Ta, Td, relh, Pair, ws, MinWindSpeed, solar, propDirect, ZenithAngle)
+        
+    # Calculate WBGT outdoors/in the sun
+    WBGTo[i] <- 0.7 * Tnwb[i] + 0.2 * Tg[i] + 0.1 * Ta
+    
+    rm(relh)
+ 
   }
   
+  wbgt$value <- WBGTo
+  wbgt$tnwb <- Tnwb
+  wbgt$tg <- Tg
+        
+      
   return(wbgt)
 }

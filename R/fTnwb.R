@@ -99,7 +99,7 @@ fTnwb <- function(Ta, Td, relh, Pair, ws, min.speed, solar, propDirect, zenith, 
   }
   
   # Minimization (iteratively)
-  opt <- optimize(fr, c(Twb_prev-50, Twb_prev+50),Tair,Pair, tol=tolerance)
+  opt <- optimize(fr, range(Tdew-1, Tair+1),Tair,Pair, tol=tolerance)
   
   Tnwb <- opt$minimum - 273.15
   

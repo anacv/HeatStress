@@ -13,7 +13,7 @@
 #' 
 #' @examples \dontrun{ 
 #' # load the meteorological variables for example data in Salamanca:
-#' data("eca_salam_jja_2003.Rdata") 
+#' data(eca_salam_jja_2003.Rdata) 
 #' wbt <- wbt.Stull(eca_salam_jja_2003$tasmean, eca_salam_jja_2003$hurs)
 #' }
 #' 
