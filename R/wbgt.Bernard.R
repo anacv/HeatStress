@@ -9,13 +9,13 @@
 #' @return A list of:
 #' @return $value: wet bulb globe temperature in degC.
 #' @return $tpwb: phychrometric wet bulb temperature (Tpwb) in degC.
-#' @author A.Casanueva (24.10.2016).
+#' @author A.Casanueva, P. Noti (21.02.2017).
 #' @details Based on Lemke and Kjellstrom 2012, using the formulation from Bernard et al. 1999.
 #' @export
 #' 
 #' @examples \dontrun{ 
 #' # load the meteorological variables for example data in Salamanca:
-#' data("eca_salam_jja_2003.Rdata") 
+#' data(eca_salam_jja_2003.Rdata) 
 #' wbgt.indoors <- wbgt.Bernard(eca_salam_jja_2003$tasmean, eca_salam_jja_2003$dewp)
 #' }
 #' 
@@ -46,34 +46,26 @@ ed <- c1 * exp((c2*dewp)/(c3+dewp))
 # **************************************************************************************
 Tpwb <- rep(NA, ndates)
 data <- rep(NA, ndates)
-wbgt <- NULL
+wbgt <- list()
 
-for (i in 1:ndates){
-	tas1 <- tas[i]
-	ed1 <- ed[i]
-	dewp1 <- dewp[i]
-	
-	# nlm does not ignore NA
-	if (!is.na(tas1) & !is.na(ed1)){
+# Function to minimize
+fr <- function(TT,tasi,edi) {  
+  abs(c4*edi - c5*edi*TT - c4*c1*exp((c2*TT)/(c3+TT)) + c5*c1*exp((c2*TT)/(c3+TT))*TT + c6*(tasi-TT))
+}
 
-		# Check to make sure Td < Ta
-		if((dewp1-tas1)>0.1) {
-			print("Warning: Dew point temperature larger than air temperature, result set to NA")
-			Tpwb[i] <- NA
-		} else{
+# Filter data to calculate the WBGT with optimization function
+noway <- (dewp-tas)>1e-4 # not physically possible, returns NA
+trivial <- abs(tas - dewp) < 1e-4 # possible when RH=100, returns tas
+xmask <- !is.na(tas + ed) & !trivial & !noway # values to calculate WBGT via the optimization function
 
-			# Function to minimize
-			fr <- function(TT,tasi,edi) {  
-				abs(c4*edi - c5*edi*TT - c4*c1*exp((c2*TT)/(c3+TT)) + c5*c1*exp((c2*TT)/(c3+TT))*TT + c6*(tasi-TT))
-			}
-		
-			# minimization
-			opt <- optimize(fr, c(tas1-50, tas1+50),tasi=tas1, edi=ed1, tol=tolerance)
-			Tpwb[i]=opt$minimum
-		}
+Tpwb[which(trivial)] <- tas[which(trivial)]
 
-	} else{Tpwb[i] <- NA; }
-
+for (i in which(xmask)){
+  
+  # minimization
+  opt <- optimize(fr, range(tas[i]+1, dewp[i]-1),tasi=tas[i], edi=ed[i], tol=tolerance)
+  Tpwb[i]=opt$minimum
+  
 }
 
 # Calculation of the WBGT with the air temperature and the phychrometric wet bulb temperature (Tpwb)
