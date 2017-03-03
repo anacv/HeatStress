@@ -5,10 +5,12 @@
 \title{Calculation of wet bulb globe temperature, following Liljegren's method.}
 \usage{
 wbgt.Liljegren(tas, dewp, wind, radiation, dates, lon, lat, tolerance = 1e-04,
-  noNAs = TRUE, swap = FALSE)
+  noNAs = TRUE, swap = FALSE, hour = FALSE)
 }
 \arguments{
 \item{tolerance}{(optional): tolerance value for the iteration. Default: 1e-4}
+
+\item{hour}{logical. If TRUE, allow working with hourly data for zenith angle calculation. Default: FALSE (12 UTC is used).}
 
 \item{tas:}{vector of air temperature in degC}
 

@@ -12,6 +12,7 @@
 #' @param tolerance (optional): tolerance value for the iteration. Default: 1e-4
 #' @param noNAs: logical, should NAs be introduced when dewp>tas? If TRUE specify how to deal in those cases (swap argument)
 #' @param swap: logical, should \code{tas >= dewp} be enforced by swapping? Otherwise, dewp is set to tas. This argument is needed when noNAs=T.
+#' @param hour logical. If TRUE, allow working with hourly data for zenith angle calculation. Default: FALSE (12 UTC is used).
 #' 
 #' @return A list of:
 #' @return $data: wet bulb globe temperature in degC
@@ -28,7 +29,7 @@
 #' }
 #' 
 
-wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, tolerance=1e-4, noNAs=TRUE, swap=FALSE){
+wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, tolerance=1e-4, noNAs=TRUE, swap=FALSE, hour=FALSE){
   
   ##################################################
   ##################################################
@@ -66,7 +67,7 @@ wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, toleranc
   for (i in which(xmask)){
       
     # Calculate zenith angle (radians are needed)
-    zenithDeg <- calZenith(dates[i], lon, lat)
+    zenithDeg <- calZenith(dates[i], lon, lat, hour)
     ZenithAngle <- degToRad(zenithDeg)
    
     # Calculate globe temperature
