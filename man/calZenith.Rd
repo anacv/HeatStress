@@ -4,7 +4,7 @@
 \alias{calZenith}
 \title{Calculate zenith angle in degrees.}
 \usage{
-calZenith(date, lon, lat)
+calZenith(date, lon, lat, hour = FALSE)
 }
 \arguments{
 \item{date}{date in the format yyyy-mm-dd (or 'yyyy-mm-dd HH:MM:SS'). For daily data, the hour 12 UTC is assumed.}
@@ -12,6 +12,8 @@ calZenith(date, lon, lat)
 \item{lon}{value for the longitude of the location.}
 
 \item{lat}{value for the latitude of the location.}
+
+\item{hour}{logical. If TRUE, allow working with hourly data. Default: FALSE (12 UTC is used).}
 }
 \value{
 zenith angle in degrees
@@ -22,6 +24,7 @@ Calculate zenith angle in degrees.
 \examples{
 \dontrun{
 calZenith("1981-06-15",  -5.66, 40.96)
+calZenith("1981-06-15 10:00:00",  -5.66, 40.96, hour=TRUE)
 }
 }
 \author{

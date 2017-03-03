@@ -5,7 +5,8 @@
 #' @param tas: vector of air temperature in degC.
 #' @param dewp: vector of dew point temperature in degC.
 #' @param tolerance (optional): tolerance value for the iteration. Default: 1e-4.
-#' @param noNAs: logical, should \code{tas >= dewp} be enforced by swapping?
+#' @param noNAs: logical, should NAs be introduced when dewp>tas? If TRUE specify how to deal in those cases (swap argument)
+#' @param swap: logical, should \code{tas >= dewp} be enforced by swapping? Otherwise, dewp is set to tas. This argument is needed when noNAs=T.
 #' 
 #' @return A list of:
 #' @return $data: wet bulb globe temperature in degC.
@@ -22,7 +23,7 @@
 #' 
 
 
-wbgt.Bernard <- function(tas, dewp, tolerance= 1e-4, noNAs=FALSE){
+wbgt.Bernard <- function(tas, dewp, tolerance= 1e-4, noNAs=TRUE, swap=FALSE){
 
 
 ##################################################
@@ -56,15 +57,18 @@ Tpwb[which(trivial)] <- tas[which(trivial)]
 # Filter data to calculate the WBGT with optimization function
 xmask <- !is.na(tas + dewp) & !trivial 
 
-## swap temperature and dewpoint if necessary
-if (noNAs){
+# Swap temperature and dewpoint if necessary
+if (noNAs & swap){
   tastmp <- pmax(tas, dewp)
   dewp <- pmin(tas, dewp)
   tas <- tastmp
-} else {
+} else if(noNAs & !swap){
+  noway <- (dewp - tas) > tolerance
+  xmask <- xmask & !noway
+  Tpwb[which(noway)] <- tas[which(noway)]
+} else if(!noNAs){
   xmask <- xmask & tas >= dewp
 }
-
 
 # ********************************************************************
 # *** calculate the vapour pressure from the dew point (ed) in hPa ***

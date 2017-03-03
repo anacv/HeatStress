@@ -4,7 +4,7 @@
 \alias{wbgt.Bernard}
 \title{Calculation of wet bulb globe temperature, following Bernard's method.}
 \usage{
-wbgt.Bernard(tas, dewp, tolerance = 1e-04, noNAs = FALSE)
+wbgt.Bernard(tas, dewp, tolerance = 1e-04, noNAs = TRUE, swap = FALSE)
 }
 \arguments{
 \item{tolerance}{(optional): tolerance value for the iteration. Default: 1e-4.}
@@ -13,7 +13,9 @@ wbgt.Bernard(tas, dewp, tolerance = 1e-04, noNAs = FALSE)
 
 \item{dewp:}{vector of dew point temperature in degC.}
 
-\item{noNAs:}{logical, should \code{tas >= dewp} be enforced by swapping?}
+\item{noNAs:}{logical, should NAs be introduced when dewp>tas? If TRUE specify how to deal in those cases (swap argument)}
+
+\item{swap:}{logical, should \code{tas >= dewp} be enforced by swapping? Otherwise, dewp is set to tas. This argument is needed when noNAs=T.}
 }
 \value{
 A list of:

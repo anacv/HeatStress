@@ -10,7 +10,8 @@
 #' @param lon: value for the longitude of the location.
 #' @param lat: value for the latitude of the location.
 #' @param tolerance (optional): tolerance value for the iteration. Default: 1e-4
-#' @param noNAs: logical, should \code{tas >= dewp} be enforced by swapping?
+#' @param noNAs: logical, should NAs be introduced when dewp>tas? If TRUE specify how to deal in those cases (swap argument)
+#' @param swap: logical, should \code{tas >= dewp} be enforced by swapping? Otherwise, dewp is set to tas. This argument is needed when noNAs=T.
 #' 
 #' @return A list of:
 #' @return $data: wet bulb globe temperature in degC
@@ -27,7 +28,7 @@
 #' }
 #' 
 
-wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, tolerance=1e-4, noNAs=FALSE){
+wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, tolerance=1e-4, noNAs=TRUE, swap=FALSE){
   
   ##################################################
   ##################################################
@@ -45,15 +46,17 @@ wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, toleranc
   # Filter data to calculate the WBGT with optimization function
   xmask <- !is.na(tas + dewp + wind + radiation)
   
-  # Swap temperature and dewpoint if necessary
-  if (noNAs){
+  if (noNAs & swap){
     tastmp <- pmax(tas, dewp)
     dewp <- pmin(tas, dewp)
     tas <- tastmp
-  } else {
+  } else if(noNAs & !swap){
+    noway <- (dewp - tas) > tolerance
+    dewp[which(noway)] <- tas[which(noway)]
+  } else if(!noNAs){
     xmask <- xmask & tas >= dewp
   }
-  
+ 
   # Calculate relative humidity from air temperature and dew point temperature
   relh <- dewp2hurs(tas,dewp) # input in degC, output in %
   
@@ -61,7 +64,7 @@ wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, toleranc
   # *** Calculation of the Tg and Tnwb ***
   # **************************************
   for (i in which(xmask)){
-         
+      
     # Calculate zenith angle (radians are needed)
     zenithDeg <- calZenith(dates[i], lon, lat)
     ZenithAngle <- degToRad(zenithDeg)

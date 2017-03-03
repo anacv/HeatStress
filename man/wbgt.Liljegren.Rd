@@ -5,7 +5,7 @@
 \title{Calculation of wet bulb globe temperature, following Liljegren's method.}
 \usage{
 wbgt.Liljegren(tas, dewp, wind, radiation, dates, lon, lat, tolerance = 1e-04,
-  noNAs = FALSE)
+  noNAs = TRUE, swap = FALSE)
 }
 \arguments{
 \item{tolerance}{(optional): tolerance value for the iteration. Default: 1e-4}
@@ -24,7 +24,9 @@ wbgt.Liljegren(tas, dewp, wind, radiation, dates, lon, lat, tolerance = 1e-04,
 
 \item{lat:}{value for the latitude of the location.}
 
-\item{noNAs:}{logical, should \code{tas >= dewp} be enforced by swapping?}
+\item{noNAs:}{logical, should NAs be introduced when dewp>tas? If TRUE specify how to deal in those cases (swap argument)}
+
+\item{swap:}{logical, should \code{tas >= dewp} be enforced by swapping? Otherwise, dewp is set to tas. This argument is needed when noNAs=T.}
 }
 \value{
 A list of:

@@ -5,6 +5,7 @@
 #' @param date date in the format yyyy-mm-dd (or 'yyyy-mm-dd HH:MM:SS'). For daily data, the hour 12 UTC is assumed.
 #' @param lon value for the longitude of the location.
 #' @param lat value for the latitude of the location.
+#' @param hour logical. If TRUE, allow working with hourly data. Default: FALSE (12 UTC is used).
 #' 
 #' @return  zenith angle in degrees
 #' @author Anke Duguay-Tetzlaff, Translated to R by Ana Casanueva (17.01.2017)
@@ -12,9 +13,10 @@
 #' 
 #' @examples \dontrun{ 
 #' calZenith("1981-06-15",  -5.66, 40.96)
+#' calZenith("1981-06-15 10:00:00",  -5.66, 40.96, hour=TRUE)
 #' }
 #' 
-calZenith <- function(date,lon,lat){
+calZenith <- function(date,lon,lat, hour=FALSE){
   
   # Internal constants used for conversion 
   EQTIME1 <- 229.18
@@ -31,10 +33,11 @@ calZenith <- function(date,lon,lat){
   DECL5 <- 0.000907
   DECL6 <- 0.002697
   DECL7 <- 0.00148
-  
-  # Translate from date to utc.hour and year
-  if(nchar(date)>10){
-    d1 <- strptime(date, format = "%Y-%m-%d %H:%M:%S") 
+ 
+  # Translate from date to utc.hour and year. If daily, set time to 12.
+  if(hour){
+    d0<- strftime(date, format = "%Y-%m-%d %H:%M:%S", usetz=TRUE, tz="UTC") 
+    d1 <- strptime(d0, format = "%Y-%m-%d %H:%M:%S", tz="UTC") # these lines are need to avoid problems with 00:00:00
     utc.hour <- as.numeric(format(d1,'%H'))
   } else {
     d1 <- strptime(date, format = "%Y-%m-%d")
@@ -44,7 +47,7 @@ calZenith <- function(date,lon,lat){
   
   # Translate from date to doy
   doy <- as.numeric(strftime(d1, format = "%j"))
-  
+
   # Number of day per year (check if it is leap year)
   if (is.leapyear(year)) dpy=366 else dpy=365 
   
