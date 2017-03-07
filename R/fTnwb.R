@@ -54,6 +54,7 @@ fTnwb <- function(Ta, Td, relh, Pair, ws, min.speed, solar, propDirect, zenith, 
   if(solar > 0 & zenith > 1.57) zenith <- 1.57 # 90°
   if(solar > 15 & zenith > 1.54)  zenith <- 1.54 # 88°
   if(solar > 900 & zenith > 1.52) zenith <- 1.52 # 87°
+  if(solar < 10 & zenith == 1.57) solar <- 0
   
   # Change units
   Tdew <- Td + 273.15 # to Kelvin
@@ -68,7 +69,8 @@ fTnwb <- function(Ta, Td, relh, Pair, ws, min.speed, solar, propDirect, zenith, 
   
   # Set values for iteration
   Tsfc <- Tair
-  Twb_prev <- Tdew # First guess is the dew point temperature
+  # Density of the air
+  density <- Pair * 100 / (Tair * r.air)
   
   # Function to minimize
   fr <- function(Twb_prev,Tair,Pair) {  
@@ -77,10 +79,7 @@ fTnwb <- function(Ta, Td, relh, Pair, ws, min.speed, solar, propDirect, zenith, 
     # Radiative heating term	
     Fatm <- stefanb * emis.wick * (0.5 * (emis.atm * Tair ^ 4 + emis.sfc * Tsfc ^ 4) - Twb_prev ^ 4) + (1 - alb.wick) * solar * ((1 - propDirect) * (1 + 0.25 * diam.wick / len.wick) + ((tan(zenith) / 3.1416) + 0.25 * diam.wick / len.wick) * propDirect + alb.sfc)
     
-    # Density of the air
-    density <- Pair * 100 / (Tair * r.air)
-    
-    # Schmidt number
+     # Schmidt number
     Sc <- viscosity(Tair) / (density * diffusivity(Tref, Pair)) 
     
     # Calculate the convective heat transfer coefficient for a long cylinder in cross flow

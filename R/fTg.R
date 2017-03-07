@@ -44,9 +44,13 @@ fTg <- function(Ta, relh, Pair, ws, min.speed, solar, propDirect, zenith, SurfAl
   
   # Fix up out-of bounds problems with zenith
   if(zenith <= 0) zenith <- 0.0000000001
-  if(zenith > 1.57) zenith <- 1.57
-  
-  # Change units
+  if(solar > 0 & zenith > 1.57) zenith <- 1.57 # 90°
+  if(solar > 15 & zenith > 1.54)  zenith <- 1.54 # 88°
+  if(solar > 900 & zenith > 1.52) zenith <- 1.52 # 87°
+  if(solar < 10 & zenith == 1.57) solar <- 0 
+ 
+
+ # Change units
   Tair <- Ta + 273.15
   RH <- relh * 0.01
   
@@ -55,7 +59,6 @@ fTg <- function(Ta, relh, Pair, ws, min.speed, solar, propDirect, zenith, SurfAl
   
   # Set values for iteration
   Tsfc <- Tair
-  Tglobe_prev <- Tair # first guess is the air temperature
   
   # Function to minimize
   fr <- function(Tglobe_prev,Tair,Pair) {  
@@ -63,16 +66,15 @@ fTg <- function(Ta, relh, Pair, ws, min.speed, solar, propDirect, zenith, SurfAl
     
     # Calculate the convective heat transfer coefficient, W/(m2 K) for flow around a sphere.
     h <- h_sphere_in_air(Tref, Pair, ws, min.speed, diam.globe)
-    
+
     # Calculate the globe temperature
     Tglobe <- (0.5 * (emis_atm(Tair, RH) * Tair ^ 4 + emis.sfc * Tsfc ^ 4) - h / (emis.globe * stefanb) * (Tglobe_prev - Tair) + solar / (2 * emis.globe * stefanb) * (1 - alb.globe) * (propDirect * (1 / (2 * cza) - 1) + 1 + alb.sfc)) ^ 0.25
-    
     abs(Tglobe - Tglobe_prev)
   }
   
   # Minimization (iteratively)
-  opt <- optimize(fr, range(Tair-1, Tglobe_prev+20),Tair,Pair, tol=tolerance)
-  
+  opt <- optimize(fr, range(Tair-10, Tair+20),Tair,Pair, tol=tolerance)
+   
   Tg <- opt$minimum - 273.15
   
   return(Tg)

@@ -44,6 +44,10 @@ wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, toleranc
   Tnwb <- rep(NA, ndates)
   Tg <- rep(NA, ndates)
   
+  # Do not allow negative wind and radiation
+  radiation[radiation<0] <- 0
+  wind[wind<0] <- 0
+  
   # Filter data to calculate the WBGT with optimization function
   xmask <- !is.na(tas + dewp + wind + radiation)
   
