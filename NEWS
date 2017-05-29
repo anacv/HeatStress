@@ -6,3 +6,7 @@ Changes in version 1.0.1
 Changes in version 1.0.2
   * Added a third option to treat situations with dewpoint > tas, in `wbgt.Bernard` and `wbgt.Liljegren`.
   * Corrected bug in zenith angle calculation with hourly data (compatibility to POSIXlt).
+
+Changes in version 1.0.3
+  * Corrected bug when customizing tolerance in `wbgt.Liljegren`.
+  * Change the interval to estimate Tg in `wbgt.Liljegren`.

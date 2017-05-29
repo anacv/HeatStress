@@ -22,7 +22,7 @@
 
 
 
-fTnwb <- function(Ta, Td, relh, Pair, ws, min.speed, solar, propDirect, zenith, irad=1, SurfAlbedo=0.4, tolerance=1e-4){
+fTnwb <- function(Ta, Td, relh, Pair, ws, min.speed, solar, propDirect, zenith, irad=1, SurfAlbedo=0.4, tol){
   
   # Physical constants
   stefanb <- 0.000000056696
@@ -98,8 +98,8 @@ fTnwb <- function(Ta, Td, relh, Pair, ws, min.speed, solar, propDirect, zenith, 
   }
   
   # Minimization (iteratively)
-  opt <- optimize(fr, range(Tdew-1, Tair+1),Tair,Pair, tol=tolerance)
-  
+  opt <- optimize(fr, range(Tdew-1, Tair+1),Tair,Pair, tol=tol)
+
   Tnwb <- opt$minimum - 273.15
   
   return(Tnwb)

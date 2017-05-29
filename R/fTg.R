@@ -21,7 +21,7 @@
 #' 
 
 
-fTg <- function(Ta, relh, Pair, ws, min.speed, solar, propDirect, zenith, SurfAlbedo=0.4, tolerance=1e-4){
+fTg <- function(Ta, relh, Pair, ws, min.speed, solar, propDirect, zenith, SurfAlbedo=0.4, tol){
   
   # Physical constants
   stefanb <- 0.000000056696
@@ -73,10 +73,9 @@ fTg <- function(Ta, relh, Pair, ws, min.speed, solar, propDirect, zenith, SurfAl
   }
   
   # Minimization (iteratively)
-  opt <- optimize(fr, range(Tair-10, Tair+20),Tair,Pair, tol=tolerance)
-   
+  opt <- optimize(fr, range(Tair-2, Tair+10),Tair,Pair, tol=tol)
   Tg <- opt$minimum - 273.15
-  
+
   return(Tg)
   
 }

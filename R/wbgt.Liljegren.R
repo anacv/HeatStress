@@ -64,25 +64,25 @@ wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, toleranc
  
   # Calculate relative humidity from air temperature and dew point temperature
   relh <- dewp2hurs(tas,dewp) # input in degC, output in %
-  
+
   # **************************************
   # *** Calculation of the Tg and Tnwb ***
   # **************************************
   for (i in which(xmask)){
-      
+  
     # Calculate zenith angle (radians are needed)
     zenithDeg <- calZenith(dates[i], lon, lat, hour)
     ZenithAngle <- degToRad(zenithDeg)
-   
+    
     # Calculate globe temperature
-    Tg[i] <- fTg(tas[i], relh[i], Pair, wind[i], MinWindSpeed, radiation[i], propDirect, ZenithAngle)
+    Tg[i] <- fTg(tas[i], relh[i], Pair, wind[i], MinWindSpeed, radiation[i], propDirect, ZenithAngle, tol=tolerance)
     
     # Calculate natural wet bulb temperature
-    Tnwb[i] <- fTnwb(tas[i], dewp[i], relh[i], Pair, wind[i], MinWindSpeed, radiation[i], propDirect, ZenithAngle)
-        
+    Tnwb[i] <- fTnwb(tas[i], dewp[i], relh[i], Pair, wind[i], MinWindSpeed, radiation[i], propDirect, ZenithAngle, tol=tolerance)
+
     rm(zenithDeg, ZenithAngle)
- 
   }
+
   
   # *******************************
   # *** Calculation of the WBGT ***
