@@ -25,7 +25,8 @@
 #' @examples \dontrun{ 
 #' # load the meteorological variables for example data in Salamanca:
 #' data(eca_salam_jja_2003.Rdata) 
-#' wbgt.outdoors <- wbgt.Liljegren(eca_salam_jja_2003$tasmean, eca_salam_jja_2003$dewp, eca_salam_jja_2003$wind, eca_salam_jja_2003$solar, eca_salam_jja_2003$Dates, -5.66, 40.96)
+#' wbgt.outdoors <- wbgt.Liljegren(eca_salam_jja_2003$tasmean, eca_salam_jja_2003$dewp, 
+#' eca_salam_jja_2003$wind, eca_salam_jja_2003$solar, eca_salam_jja_2003$Dates, -5.66, 40.96)
 #' }
 #' 
 
