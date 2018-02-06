@@ -2,9 +2,8 @@
 #' 
 #' Compute the diffusivity of water vapor in air, m2/s
 #' 
-#' @param Tk: value of air temperature in Kelvin.
-#' @param Pair: value of air pressure in hPa.
-#' 
+#' @inheritParams h_cylinder_in_air
+#'  
 #' @return  diffusivity of water vapor in air, m2/s
 #' 
 #' @author Ana Casanueva (05.01.2017).
@@ -12,6 +11,11 @@
 #' 
 
 diffusivity <- function(Tk, Pair){
+
+  # assertion statements
+  assertthat::assert_that(is.numeric(Tk), msg="'Tk' is not an integer")
+  assertthat::assert_that(Tk > 273.15, msg="'Tk' should be in Kelvin")
+  assertthat::assert_that(is.numeric(Pair), msg="'Pair' is not an integer")
   
   pcrit13 <- (36.4 * 218) ^ (1 / 3)
   tcrit512 <- (132 * 647.3) ^ (5 / 12)

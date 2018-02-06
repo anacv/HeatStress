@@ -7,9 +7,9 @@
 diffusivity(Tk, Pair)
 }
 \arguments{
-\item{Tk:}{value of air temperature in Kelvin.}
+\item{Tk}{value of air temperature in Kelvin.}
 
-\item{Pair:}{value of air pressure in hPa.}
+\item{Pair}{value of air pressure in hPa.}
 }
 \value{
 diffusivity of water vapor in air, m2/s

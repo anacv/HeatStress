@@ -7,15 +7,15 @@
 wbgt.Bernard(tas, dewp, tolerance = 1e-04, noNAs = TRUE, swap = FALSE)
 }
 \arguments{
+\item{tas}{vector of air temperature in degC.}
+
+\item{dewp}{vector of dew point temperature in degC.}
+
 \item{tolerance}{(optional): tolerance value for the iteration. Default: 1e-4.}
 
-\item{tas:}{vector of air temperature in degC.}
+\item{noNAs}{logical, should NAs be introduced when dewp>tas? If TRUE specify how to deal in those cases (swap argument)}
 
-\item{dewp:}{vector of dew point temperature in degC.}
-
-\item{noNAs:}{logical, should NAs be introduced when dewp>tas? If TRUE specify how to deal in those cases (swap argument)}
-
-\item{swap:}{logical, should \code{tas >= dewp} be enforced by swapping? Otherwise, dewp is set to tas. This argument is needed when noNAs=T.}
+\item{swap}{logical, should \code{tas >= dewp} be enforced by swapping? Otherwise, dewp is set to tas. This argument is needed when noNAs=T.}
 }
 \value{
 A list of:
@@ -33,8 +33,8 @@ Based on Lemke and Kjellstrom 2012, using the formulation from Bernard et al. 19
 \examples{
 \dontrun{ 
 # load the meteorological variables for example data in Salamanca:
-data(eca_salam_jja_2003.Rdata) 
-wbgt.indoors <- wbgt.Bernard(eca_salam_jja_2003$tasmean, eca_salam_jja_2003$dewp)
+data("data_obs") 
+wbgt.indoors <- wbgt.Bernard(tas=data_obs$tasmean, dewp=data_obs$dewp)
 }
 
 }

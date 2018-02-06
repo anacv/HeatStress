@@ -7,7 +7,7 @@
 radToDeg(angleRad)
 }
 \arguments{
-\item{angleRad:}{angle in radians.}
+\item{angleRad}{angle in radians.}
 }
 \value{
 Angle in degrees.

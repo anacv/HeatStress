@@ -2,7 +2,7 @@
 #' 
 #' Calculate the thermal conductivity of air, W/(m K).
 #' 
-#' @param Tk: value of air temperature in Kelvin.
+#' @param Tk value of air temperature in Kelvin.
 #' 
 #' @return Thermal conductivity of air, W/(m K).
 #' 
@@ -12,7 +12,12 @@
 
 ##############################################################################
 thermal_cond <- function(Tk){
+
+  # assertion statements
+  assertthat::assert_that(is.numeric(Tk), msg="'Tk' is not an integer")
+  assertthat::assert_that(Tk > 273.15, msg="'Tk' should be in Kelvin")
   
+  # Constants
   m.air <- 28.97
   r.gas <- 8314.34
   r.air <- r.gas / m.air

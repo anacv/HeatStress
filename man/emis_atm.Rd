@@ -7,9 +7,9 @@
 emis_atm(Tk, RH)
 }
 \arguments{
-\item{Tk:}{value of air temperature in Kelvin.}
+\item{Tk}{value of air temperature in Kelvin.}
 
-\item{RH:}{value of relative humidity in fraction.}
+\item{RH}{value of relative humidity in fraction.}
 }
 \value{
 atmospheric emissivity.

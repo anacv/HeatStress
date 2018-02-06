@@ -2,11 +2,11 @@
 #' 
 #' Calculate the convective heat transfer coefficient for a long cylinder in cross flow.
 #' 
-#' @param Tk: value of air temperature in Kelvin.
-#' @param Pair: value of air pressure in hPa.
-#' @param speed: value of wind speed in m/s.
-#' @param min.speed: value of minimum wind speed in m/s.
-#' @param diam.wick: diameter of the cylinder in m.
+#' @param Tk value of air temperature in Kelvin.
+#' @param Pair value of air pressure in hPa.
+#' @param speed value of wind speed in m/s.
+#' @param min.speed value of minimum wind speed in m/s.
+#' @param diam.wick diameter of the cylinder in m.
 #' 
 #' @return Convective heat transfer coefficient for a long cylinder, W/(m2 K).
 #' 
@@ -16,6 +16,16 @@
 
 h_cylinder_in_air <- function(Tk, Pair, speed, min.speed, diam.wick){
   
+  # assertion statements
+  assertthat::assert_that(is.numeric(Tk), msg="'Tk' is not an integer")
+  assertthat::assert_that(Tk > 273.15, msg="'Tk' should be in Kelvin")
+  assertthat::assert_that(is.numeric(Pair), msg="'Pair' is not an integer")
+  assertthat::assert_that(is.numeric(speed), msg="'speed' is not an integer")
+  assertthat::assert_that(is.numeric(min.speed), msg="'min.speed' is not an integer")
+  assertthat::assert_that(is.numeric(diam.wick), msg="'diam.wick' is not an integer")
+  assertthat::assert_that(diam.wick < 1, msg="'diam.wick' should be meters")
+  
+  # Constants
   m.air <- 28.97
   r.gas <- 8314.34
   r.air <- r.gas / m.air

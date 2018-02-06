@@ -2,11 +2,8 @@
 #' 
 #' Calculate the convective heat tranfer coefficient for flow around a sphere.
 #' 
-#' @param Tk: value of air temperature in Kelvin.
-#' @param Pair: value of air pressure in hPa.
-#' @param speed: value of wind speed in m/s.
-#' @param min.speed: value of minimum wind speed in m/s.
-#' @param diam.globe: diameter of the sphere in m.
+#' @param diam.globe diameter of the sphere in m.
+#' @inheritParams h_cylinder_in_air
 #' 
 #' @return Convective heat tranfer coefficient for flow around a sphere, W/(m2 K).
 #' 
@@ -16,6 +13,16 @@
 
 h_sphere_in_air <- function(Tk, Pair, speed, min.speed, diam.globe){
   
+  # assertion statements
+  assertthat::assert_that(is.numeric(Tk), msg="'Tk' is not an integer")
+  assertthat::assert_that(Tk > 273.15, msg="'Tk' should be in Kelvin")
+  assertthat::assert_that(is.numeric(Pair), msg="'Pair' is not an integer")
+  assertthat::assert_that(is.numeric(speed), msg="'speed' is not an integer")
+  assertthat::assert_that(is.numeric(min.speed), msg="'min.speed' is not an integer")
+  assertthat::assert_that(is.numeric(diam.globe), msg="'diam.globe' is not an integer")
+  assertthat::assert_that(diam.globe < 1, msg="'diam.globe' should be meters")
+  
+  # Constants
   m.air <- 28.97
   r.gas <- 8314.34
   r.air <- r.gas / m.air

@@ -7,15 +7,15 @@
 h_sphere_in_air(Tk, Pair, speed, min.speed, diam.globe)
 }
 \arguments{
-\item{Tk:}{value of air temperature in Kelvin.}
+\item{Tk}{value of air temperature in Kelvin.}
 
-\item{Pair:}{value of air pressure in hPa.}
+\item{Pair}{value of air pressure in hPa.}
 
-\item{speed:}{value of wind speed in m/s.}
+\item{speed}{value of wind speed in m/s.}
 
-\item{min.speed:}{value of minimum wind speed in m/s.}
+\item{min.speed}{value of minimum wind speed in m/s.}
 
-\item{diam.globe:}{diameter of the sphere in m.}
+\item{diam.globe}{diameter of the sphere in m.}
 }
 \value{
 Convective heat tranfer coefficient for flow around a sphere, W/(m2 K).

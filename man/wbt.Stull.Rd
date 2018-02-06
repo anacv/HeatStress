@@ -7,9 +7,9 @@
 wbt.Stull(tas, hurs)
 }
 \arguments{
-\item{tas:}{vector of air temperature in degC.}
+\item{tas}{vector of air temperature in degC.}
 
-\item{hurs:}{vector of relative humidity in \%.}
+\item{hurs}{vector of relative humidity in \%.}
 }
 \value{
 Wet bulb temperature in degC.
@@ -23,8 +23,8 @@ Formulation from Stull 2011, Journal of Applied Meteorology and Climatology.
 \examples{
 \dontrun{ 
 # load the meteorological variables for example data in Salamanca:
-data(eca_salam_jja_2003.Rdata) 
-wbt <- wbt.Stull(eca_salam_jja_2003$tasmean, eca_salam_jja_2003$hurs)
+data("data_obs") 
+wbt <- wbt.Stull(data_obs$tasmean, hurs=data_obs$hurs)
 }
 
 }

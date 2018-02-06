@@ -4,31 +4,33 @@
 \alias{fTnwb}
 \title{Calculation of the natural wet bulb temperature.}
 \usage{
-fTnwb(Ta, Td, relh, Pair, ws, min.speed, solar, propDirect, zenith, irad = 1,
-  SurfAlbedo = 0.4, tol)
+fTnwb(tas, dewp, relh, Pair, wind, min.speed, radiation, propDirect, zenith,
+  irad = 1, SurfAlbedo = 0.4, tolerance = 1e-04)
 }
 \arguments{
+\item{tas}{vector of temperature in degC.}
+
+\item{dewp}{vector of dewpoint temperature in degC.}
+
+\item{relh}{vector of relative humidity in \%.}
+
+\item{Pair}{value of air pressure in hPa.}
+
+\item{wind}{vector of wind speed in m/s.}
+
+\item{min.speed}{value of minimum wind speed in m/s.}
+
+\item{radiation}{vector of solar shortwave downwelling radiation in W/m2.}
+
+\item{propDirect}{proportion of direct radiation = direct/(diffuse + direct).}
+
+\item{zenith}{zenith angle in radians.}
+
 \item{irad}{(optional): include radiation (1) or not (irad=0, psychrometric web bulb temp). Default: 1.}
 
-\item{SurfAlbedo}{(optional): albedo in the surface. Default: 0.4.}
+\item{SurfAlbedo}{(optional) albedo in the surface. Default: 0.4.}
 
-\item{Ta:}{value of air temperature in degC.}
-
-\item{relh:}{value of relative humidity in \%.}
-
-\item{Pair:}{value of atmospheric pressure in hPa.}
-
-\item{ws:}{value of wind speed in m/s.}
-
-\item{min.speed:}{value of minimum wind speed in m/s.}
-
-\item{solar:}{value of solar shortwave downwelling radiation in W/m2.}
-
-\item{propDirect:}{proportion of direct radiation = direct/(diffuse + direct).}
-
-\item{zenith:}{zenith angle in radians.}
-
-\item{tolerance}{(optional): tolerance value for the iteration. Default: 1e-4.}
+\item{tolerance}{(optional) tolerance value for the iteration. Default: 1e-4.}
 }
 \value{
 Natural wet bulb globe temperature in degC.

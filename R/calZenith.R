@@ -2,10 +2,11 @@
 #' 
 #' Calculate zenith angle in degrees.
 #' 
-#' @param date date in the format yyyy-mm-dd (or 'yyyy-mm-dd HH:MM:SS'). For daily data, the hour 12 UTC is assumed.
+#' @param dates vector of dates in the format yyyy-mm-dd (or 'yyyy-mm-dd HH:MM:SS').  If format yyyy-mm-dd is provided, the default hour is 12:00:00.
 #' @param lon value for the longitude of the location.
 #' @param lat value for the latitude of the location.
-#' @param hour logical. If TRUE, allow working with hourly data. Default: FALSE (12 UTC is used).
+#' @param hour logical. If TRUE, allow working with hourly data for zenith angle
+#'  calculation. Default: FALSE (12 UTC is used).
 #' 
 #' @return  zenith angle in degrees
 #' @author Anke Duguay-Tetzlaff, Translated to R by Ana Casanueva (17.01.2017)
@@ -16,8 +17,15 @@
 #' calZenith("1981-06-15 10:00:00",  -5.66, 40.96, hour=TRUE)
 #' }
 #' 
-calZenith <- function(date,lon,lat, hour=FALSE){
-  
+calZenith <- function(dates,lon,lat, hour=FALSE){
+
+  # assertion statements
+  assertthat::assert_that(is.numeric(lon), msg="'lon' is not an integer")
+  assertthat::assert_that(is.numeric(lat), msg="'lat' is not an integer")
+  assertthat::assert_that(is.logical(hour), msg="'hour' should be logical")
+  assertthat::assert_that(lon <= 180 & lon >=-180, msg="Invalid lon")
+  assertthat::assert_that(lat <= 90 & lon >=-90, msg="Invalid lat")
+
   # Internal constants used for conversion 
   EQTIME1 <- 229.18
   EQTIME2 <- 0.000075
@@ -36,11 +44,11 @@ calZenith <- function(date,lon,lat, hour=FALSE){
  
   # Translate from date to utc.hour and year. If daily, set time to 12.
   if(hour){
-    d0<- strftime(date, format = "%Y-%m-%d %H:%M:%S", usetz=TRUE, tz="UTC") 
+    d0<- strftime(dates, format = "%Y-%m-%d %H:%M:%S", usetz=TRUE, tz="UTC") 
     d1 <- strptime(d0, format = "%Y-%m-%d %H:%M:%S", tz="UTC") # these lines are need to avoid problems with 00:00:00
     utc.hour <- as.numeric(format(d1,'%H'))
   } else {
-    d1 <- strptime(date, format = "%Y-%m-%d")
+    d1 <- strptime(dates, format = "%Y-%m-%d")
     utc.hour <- 12
   }
   year <- as.numeric(format(d1,'%Y'))

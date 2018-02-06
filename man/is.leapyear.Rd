@@ -7,7 +7,7 @@
 is.leapyear(year)
 }
 \arguments{
-\item{Year}{to be checked.}
+\item{year}{to be checked.}
 }
 \value{
 logical, TRUE/FALSE.

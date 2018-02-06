@@ -7,9 +7,9 @@
 dewp2hurs(tas, dewp)
 }
 \arguments{
-\item{tas:}{vector of temperature in degC}
+\item{tas}{vector of temperature in degC.}
 
-\item{dewp:}{vector of dewpoint temperature in degC}
+\item{dewp}{vector of dewpoint temperature in degC.}
 }
 \value{
 relative humidity in %

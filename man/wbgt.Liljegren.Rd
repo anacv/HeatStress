@@ -8,27 +8,28 @@ wbgt.Liljegren(tas, dewp, wind, radiation, dates, lon, lat, tolerance = 1e-04,
   noNAs = TRUE, swap = FALSE, hour = FALSE)
 }
 \arguments{
-\item{tolerance}{(optional): tolerance value for the iteration. Default: 1e-4}
+\item{tas}{vector of temperature in degC.}
 
-\item{hour}{logical. If TRUE, allow working with hourly data for zenith angle calculation. Default: FALSE (12 UTC is used).}
+\item{dewp}{vector of dewpoint temperature in degC.}
 
-\item{tas:}{vector of air temperature in degC}
+\item{wind}{vector of wind speed in m/s.}
 
-\item{dewp:}{vector of dew point temperature in degC}
+\item{radiation}{vector of solar shortwave downwelling radiation in W/m2.}
 
-\item{wind:}{vector of wind speed in m/s}
+\item{dates}{vector of dates in the format yyyy-mm-dd (or 'yyyy-mm-dd HH:MM:SS').  If format yyyy-mm-dd is provided, the default hour is 12:00:00.}
 
-\item{radiation:}{vector of solar shortwave downwelling radiation in W/m2}
+\item{lon}{value for the longitude of the location.}
 
-\item{dates:}{vector with dates in format yyyy-mm-dd H:M:S, same length as the other inputs. If format yyyy-mm-dd is provided, the default hour is 12:00:00.}
+\item{lat}{value for the latitude of the location.}
 
-\item{lon:}{value for the longitude of the location.}
+\item{tolerance}{(optional) tolerance value for the iteration. Default: 1e-4.}
 
-\item{lat:}{value for the latitude of the location.}
+\item{noNAs}{logical, should NAs be introduced when dewp>tas? If TRUE specify how to deal in those cases (swap argument)}
 
-\item{noNAs:}{logical, should NAs be introduced when dewp>tas? If TRUE specify how to deal in those cases (swap argument)}
+\item{swap}{logical, should \code{tas >= dewp} be enforced by swapping? Otherwise, dewp is set to tas. This argument is needed when noNAs=T.}
 
-\item{swap:}{logical, should \code{tas >= dewp} be enforced by swapping? Otherwise, dewp is set to tas. This argument is needed when noNAs=T.}
+\item{hour}{logical. If TRUE, allow working with hourly data for zenith angle
+calculation. Default: FALSE (12 UTC is used).}
 }
 \value{
 A list of:
@@ -43,14 +44,14 @@ $Tg: globe temperature in degC
 Calculation of wet bulb globe temperature from air temperature, dew point temperature, radiation and wind.
 }
 \details{
-This corresponds to the implementation for outdoors or in the sun conditions. Original fortran code by James C. Liljegren, translated by Bruno Lemke into Visual Basic (VBA) and Ana Casanueva into R.
+This corresponds to the implementation for outdoors or in the sun conditions (Liljegren et al. 2008). Original fortran code by James C. Liljegren, translated by Bruno Lemke into Visual Basic (VBA) and Ana Casanueva into R.
 }
 \examples{
 \dontrun{ 
 # load the meteorological variables for example data in Salamanca:
-data(eca_salam_jja_2003.Rdata) 
-wbgt.outdoors <- wbgt.Liljegren(eca_salam_jja_2003$tasmean, eca_salam_jja_2003$dewp, 
-eca_salam_jja_2003$wind, eca_salam_jja_2003$solar, eca_salam_jja_2003$Dates, -5.66, 40.96)
+data("data_obs") 
+wbgt.outdoors <- wbgt.Liljegren(tas=data_obs$tasmean, dewp=data_obs$dewp, 
+wind=data_obs$wind, radiation=data_obs$solar, dates= data_obs$Dates, lon=-5.66, lat=40.96)
 }
 
 }

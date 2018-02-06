@@ -7,7 +7,7 @@
 viscosity(Tk)
 }
 \arguments{
-\item{Tk:}{value of air temperature in Kelvin.}
+\item{Tk}{value of air temperature in Kelvin.}
 }
 \value{
 viscosity of air, kg/(m s).

@@ -2,7 +2,7 @@
 #' 
 #' Check whether a year is a leap year.
 #' 
-#' @param Year to be checked.
+#' @param year to be checked.
 #' 
 #' @return logical, TRUE/FALSE.
 #' 
@@ -10,6 +10,9 @@
 
 
 is.leapyear <- function(year){
+
+  # assertion statements
+  assertthat::assert_that(is.numeric(year), msg="'year' is not an integer")
   
   return(((year %% 4 == 0) & (year %% 100 != 0)) | (year %% 400 == 0))
 }

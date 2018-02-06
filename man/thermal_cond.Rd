@@ -7,7 +7,7 @@
 thermal_cond(Tk)
 }
 \arguments{
-\item{Tk:}{value of air temperature in Kelvin.}
+\item{Tk}{value of air temperature in Kelvin.}
 }
 \value{
 Thermal conductivity of air, W/(m K).

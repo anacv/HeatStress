@@ -7,7 +7,7 @@
 h_evap(Tk)
 }
 \arguments{
-\item{Tk:}{value of air temperature in Kelvin.}
+\item{Tk}{value of air temperature in Kelvin.}
 }
 \value{
 Heat of evaporation, J/(kg K).

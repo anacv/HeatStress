@@ -4,29 +4,29 @@
 \alias{fTg}
 \title{Calculation of the globe temperature.}
 \usage{
-fTg(Ta, relh, Pair, ws, min.speed, solar, propDirect, zenith,
-  SurfAlbedo = 0.4, tol)
+fTg(tas, relh, Pair, wind, min.speed, radiation, propDirect, zenith,
+  SurfAlbedo = 0.4, tolerance = 1e-04)
 }
 \arguments{
-\item{SurfAlbedo}{(optional): albedo in the surface. Default: 0.4.}
+\item{tas}{vector of temperature in degC.}
 
-\item{Ta:}{value of air temperature in degC.}
+\item{relh}{vector of relative humidity in \%.}
 
-\item{relh:}{value of relative humidity in \%.}
+\item{Pair}{value of air pressure in hPa.}
 
-\item{Pair:}{value of atmospheric pressure in hPa.}
+\item{wind}{vector of wind speed in m/s.}
 
-\item{ws:}{value of wind speed in m/s.}
+\item{min.speed}{value of minimum wind speed in m/s.}
 
-\item{min.speed:}{value of minimum wind speed in m/s.}
+\item{radiation}{vector of solar shortwave downwelling radiation in W/m2.}
 
-\item{solar:}{value of solar shortwave downwelling radiation in W/m2.}
+\item{propDirect}{proportion of direct radiation = direct/(diffuse + direct).}
 
-\item{propDirect:}{proportion of direct radiation = direct/(diffuse + direct).}
+\item{zenith}{zenith angle in radians.}
 
-\item{zenith:}{zenith angle in radians.}
+\item{SurfAlbedo}{(optional) albedo in the surface. Default: 0.4.}
 
-\item{tolerance}{(optional): tolerance value for the iteration. Default: 1e-4.}
+\item{tolerance}{(optional) tolerance value for the iteration. Default: 1e-4.}
 }
 \value{
 Globe temperature in degC.

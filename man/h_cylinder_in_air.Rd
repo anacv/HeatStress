@@ -7,15 +7,15 @@
 h_cylinder_in_air(Tk, Pair, speed, min.speed, diam.wick)
 }
 \arguments{
-\item{Tk:}{value of air temperature in Kelvin.}
+\item{Tk}{value of air temperature in Kelvin.}
 
-\item{Pair:}{value of air pressure in hPa.}
+\item{Pair}{value of air pressure in hPa.}
 
-\item{speed:}{value of wind speed in m/s.}
+\item{speed}{value of wind speed in m/s.}
 
-\item{min.speed:}{value of minimum wind speed in m/s.}
+\item{min.speed}{value of minimum wind speed in m/s.}
 
-\item{diam.wick:}{diameter of the cylinder in m.}
+\item{diam.wick}{diameter of the cylinder in m.}
 }
 \value{
 Convective heat transfer coefficient for a long cylinder, W/(m2 K).

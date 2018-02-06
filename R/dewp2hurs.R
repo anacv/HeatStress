@@ -2,17 +2,18 @@
 #' 
 #' Calculation of relative humidity from temperature and dewpoint temperature.
 #' 
-#' @param tas: vector of temperature in degC
-#' @param dewp: vector of dewpoint temperature in degC
+#' @param tas vector of temperature in degC.
+#' @param dewp vector of dewpoint temperature in degC.
 #' 
 #' @return  relative humidity in %
 #' @author Ana Casanueva (11.08.201)
-#' @details Formulation from Dosseger et al. 1992. Formula 99 in MCH document.
 #' 
+#' @details Formulation from Dosseger et al. 1992. Formula 99 in MCH document.
+#' @export
 
 
 dewp2hurs <- function(tas,dewp){
-  
+
   # Constants (see Dosseger et al. 1992)
   # IF T >= 0: a = 17.368 and b = 238.83
   # IF T < 0: a = 17.856 and b = 245.52
