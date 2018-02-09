@@ -14,7 +14,7 @@ diffusivity <- function(Tk, Pair){
 
   # assertion statements
   assertthat::assert_that(is.numeric(Tk), msg="'Tk' is not an integer")
-  assertthat::assert_that(Tk > 273.15, msg="'Tk' should be in Kelvin")
+  assertthat::assert_that(Tk > 200, msg="'Tk' should be in Kelvin")
   assertthat::assert_that(is.numeric(Pair), msg="'Pair' is not an integer")
   
   pcrit13 <- (36.4 * 218) ^ (1 / 3)

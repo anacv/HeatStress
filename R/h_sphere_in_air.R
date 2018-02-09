@@ -15,7 +15,7 @@ h_sphere_in_air <- function(Tk, Pair, speed, min.speed, diam.globe){
   
   # assertion statements
   assertthat::assert_that(is.numeric(Tk), msg="'Tk' is not an integer")
-  assertthat::assert_that(Tk > 273.15, msg="'Tk' should be in Kelvin")
+  assertthat::assert_that(Tk > 200, msg="'Tk' should be in Kelvin")
   assertthat::assert_that(is.numeric(Pair), msg="'Pair' is not an integer")
   assertthat::assert_that(is.numeric(speed), msg="'speed' is not an integer")
   assertthat::assert_that(is.numeric(min.speed), msg="'min.speed' is not an integer")

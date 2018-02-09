@@ -14,7 +14,7 @@ h_evap <- function(Tk){
   
   # assertion statements
   assertthat::assert_that(is.numeric(Tk), msg="'Tk' is not an integer")
-  assertthat::assert_that(Tk > 273.15, msg="'Tk' should be in Kelvin")
+  assertthat::assert_that(Tk > 200, msg="'Tk' should be in Kelvin")
   
   evap <- (313.15 - Tk) / 30 * (-71100) + 2407300
   return(evap)
