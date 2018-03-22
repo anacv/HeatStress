@@ -51,6 +51,7 @@ uhi <- function(tas,hurs){
     if(!is.na(result[i])){
       if(hurs[i]<13 & tasf[i]<=112) result[i] <- result[i] - ((13-hurs[i])/4)*sqrt((17-abs(tasf[i]-95))/17)
       if(hurs[i]>85 & tasf[i]<=87) result[i] <- result[i] + ((hurs[i]-85)/10) * ((87-tasf[i])/5)
+      if(tasf[i]<80) result[i] <- 0 
     }
   }
   
