@@ -10,3 +10,6 @@ Changes in version 1.0.2
 Changes in version 1.0.3
   * Corrected bug when customizing tolerance in `wbgt.Liljegren`.
   * Change the interval to estimate Tg in `wbgt.Liljegren`.
+  
+Changes in version 1.0.4
+  * Inclusion of more heat indices.

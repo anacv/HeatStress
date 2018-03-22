@@ -19,5 +19,11 @@ The following calculation methods are implemented:
  \item \code{wbt.Stull}: Calculation of the Wet Bulb Temperature (Stull 2011).
  \item \code{wbgt.Bernard}: Calculation of the Wet Bulb Globe Temperature in the shade (Bernard et al. 1999) 
  \item \code{wbgt.Liljegren}: Calculation of the Wet Bulb Globe Temperature in the sun (Liljegren et al. 2008) 
+ \item \code{swbgt}: Calculation of the simplified wet bulb globe temperature (Buzan et al. 2015 and references therein).
+ \item \code{apparentTemp}: Calculation of the apparent temperature (Buzan et al. 2015 and references therein).
+ \item \code{effectiveTemp}: Calculation of the effective temperature (Coccolo et al. 2016 and references therein).
+ \item \code{humidex}: Calculation of the humidex (Buzan et al. 2015 and references therein).
+ \item \code{discomInd}: Calculation of the discomfort index (Coccolo et al. 2016 and references therein).
+ \item \code{uhi}: Calculation of the universal heat index (Buzan et al. 2015 and references therein).
  }
 }
