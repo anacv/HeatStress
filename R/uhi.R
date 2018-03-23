@@ -42,8 +42,7 @@ uhi <- function(tas,hurs){
   tasf <- tas*1.8 +32
 
   # calculation of the effective temperature
-  result <- a + b * tasf + c * hurs + d * tasf * hurs + e * tasf^2 + f * hurs^2 + g * tasf^2 * hurs + h * tasf * hurs^2
- + i * tasf^2 * hurs^2
+  result <- a + b * tasf + c * hurs + d * tasf * hurs + e * tasf^2 + f * hurs^2 + g * tasf^2 * hurs + h * tasf * hurs^2 + i * tasf^2 * hurs^2
   
   # Adjust values
   for(i in 1:length(result)){
