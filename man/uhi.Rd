@@ -12,7 +12,7 @@ uhi(tas, hurs)
 \item{hurs}{vector of relative humidity in \%.}
 }
 \value{
-Universal heat index (unitless).
+Universal heat index in degrees Fahrenheit.
 }
 \description{
 Calculation of the universal heat index from temperature and relative humidity.

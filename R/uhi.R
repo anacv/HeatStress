@@ -5,7 +5,7 @@
 #' @param tas vector of air temperature in degC.
 #' @param hurs vector of relative humidity in \%.
 #' 
-#' @return Universal heat index (unitless).
+#' @return Universal heat index in degrees Fahrenheit.
 #' @author A.Casanueva (22.03.2018).
 #' @details Formula based on air temperature and relative humidity, as it is calculated in Buzan et al. 2015, but adapted for degrees Celsius.
 #'  
