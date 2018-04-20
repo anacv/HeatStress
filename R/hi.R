@@ -1,11 +1,11 @@
-#' Calculation of the universal heat index.
+#' Calculation of the heat index.
 #' 
-#' Calculation of the universal heat index from temperature and relative humidity.
+#' Calculation of the heat index from temperature and relative humidity.
 #' 
 #' @param tas vector of air temperature in degC.
 #' @param hurs vector of relative humidity in \%.
 #' 
-#' @return Universal heat index in degrees Fahrenheit.
+#' @return Heat index in degrees Fahrenheit.
 #' @author A.Casanueva (22.03.2018).
 #' @details Formula based on air temperature and relative humidity, as it is calculated in Buzan et al. 2015, but adapted for degrees Celsius.
 #'  
@@ -14,13 +14,13 @@
 #' @examples \dontrun{ 
 #' # load the meteorological variables for example data in Salamanca:
 #' data("data_obs") 
-#' hi <- uhi(data_obs$tasmean, hurs=data_obs$hurs)
+#' heatindex <- hi(data_obs$tasmean, hurs=data_obs$hurs)
 #' }
 #' 
 
 
 
-uhi <- function(tas,hurs){
+hi <- function(tas,hurs){
   
   # Constants
   a <- -42.379
@@ -41,7 +41,7 @@ uhi <- function(tas,hurs){
   # Temperature to Fahrenheit
   tasf <- tas*1.8 +32
 
-  # calculation of the effective temperature
+  # calculation of the heat index
   result <- a + b * tasf + c * hurs + d * tasf * hurs + e * tasf^2 + f * hurs^2 + g * tasf^2 * hurs + h * tasf * hurs^2 + i * tasf^2 * hurs^2
   
   # Adjust values

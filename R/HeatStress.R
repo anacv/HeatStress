@@ -19,7 +19,7 @@
 #'  \item \code{effectiveTemp}: Calculation of the effective temperature (Coccolo et al. 2016 and references therein).
 #'  \item \code{humidex}: Calculation of the humidex (Buzan et al. 2015 and references therein).
 #'  \item \code{discomInd}: Calculation of the discomfort index (Coccolo et al. 2016 and references therein).
-#'  \item \code{uhi}: Calculation of the universal heat index (Buzan et al. 2015 and references therein).
+#'  \item \code{hi}: Calculation of the heat index (Buzan et al. 2015 and references therein).
 
 #'  } 
 NULL 
