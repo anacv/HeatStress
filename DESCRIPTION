@@ -6,7 +6,7 @@ Date: 2017-03-03
 Author: A. Casanueva
 Maintainer: A.Casanueva <ana.casanueva@meteoswiss.ch>
 Description: Calculate heat stress indices based on meteorological data.
-License: GPL-3
+License: file LICENCE
 RoxygenNote: 6.0.1
 Depends: R (>= 2.10.0)
 Suggests: testthat, assertthat
