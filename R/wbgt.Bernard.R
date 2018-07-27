@@ -27,8 +27,6 @@
 wbgt.Bernard <- function(tas, dewp, tolerance= 1e-4, noNAs=TRUE, swap=FALSE){
 
   # assertion statements
-  assertthat::assert_that(is.numeric(tas), msg="'tas' is not an integer")
-  assertthat::assert_that(is.numeric(dewp), msg="'dewp' is not an integer")
   assertthat::assert_that(length(tas)==length(dewp), 
                           msg="Input vectors do not have the same length")
   

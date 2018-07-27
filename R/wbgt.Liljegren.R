@@ -26,12 +26,12 @@
 
 wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, tolerance=1e-4, 
                            noNAs=TRUE, swap=FALSE, hour=FALSE){
+
   
+
+    
+
   # assertion statements
-  assertthat::assert_that(is.numeric(tas), msg="'tas' is not an integer")
-  assertthat::assert_that(is.numeric(dewp), msg="'dewp' is not an integer")
-  assertthat::assert_that(is.numeric(wind), msg="'wind' is not an integer")
-  assertthat::assert_that(is.numeric(radiation), msg="'radiation' is not an integer")
   assertthat::assert_that(is.logical(hour), msg="'hour' should be logical")
   assertthat::assert_that(is.logical(noNAs), msg="'noNAs' should be logical")
   assertthat::assert_that(is.logical(swap), msg="'swap' should be logical")
@@ -56,8 +56,6 @@ wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, toleranc
   radiation[radiation<0] <- 0
   wind[wind<0] <- 0
   
-  # Filter data to calculate the WBGT with optimization function
-  xmask <- !is.na(tas + dewp + wind + radiation)
   
   if (noNAs & swap){
     tastmp <- pmax(tas, dewp)
@@ -99,6 +97,7 @@ wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, toleranc
   wbgt <- list(data = 0.7 * Tnwb + 0.2 * Tg + 0.1 * tas, 
                Tnwb = Tnwb,
                Tg = Tg)
+  
 
   return(wbgt)
 }

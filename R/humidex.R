@@ -23,8 +23,6 @@
 humidex <- function(tas,hurs){
 
   # assertion statements
-  assertthat::assert_that(is.numeric(tas), msg="'tas' is not an integer")
-  assertthat::assert_that(is.numeric(hurs), msg="'hurs' is not an integer")
   assertthat::assert_that(length(hurs)==length(tas), msg="Input vectors do not have the same length")
   
   # Calculate vapour pressure in hPa

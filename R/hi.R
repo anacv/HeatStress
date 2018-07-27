@@ -34,8 +34,6 @@ hi <- function(tas,hurs){
   i <- -1.99e-6
 
   # assertion statements
-  assertthat::assert_that(is.numeric(tas), msg="'tas' is not an integer")
-  assertthat::assert_that(is.numeric(hurs), msg="'hurs' is not an integer")
   assertthat::assert_that(length(hurs)==length(tas), msg="Input vectors do not have the same length")
   
   # Temperature to Fahrenheit

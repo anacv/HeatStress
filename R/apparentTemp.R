@@ -22,9 +22,6 @@
 apparentTemp <- function(tas,hurs, wind){
   
   # assertion statements
-  assertthat::assert_that(is.numeric(tas), msg="'tas' is not an integer")
-  assertthat::assert_that(is.numeric(hurs), msg="'hurs' is not an integer")
-  assertthat::assert_that(is.numeric(wind), msg="'wind' is not an integer")
   assertthat::assert_that(length(hurs)==length(tas) & length(tas)==length(wind), msg="Input vectors do not have the same length")
   
   # Calculate vapour pressure in hPa
