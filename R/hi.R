@@ -5,7 +5,7 @@
 #' @param tas vector of air temperature in degC.
 #' @param hurs vector of relative humidity in \%.
 #' 
-#' @return Hheat index in degrees Fahrenheit.
+#' @return Heat index in degrees Fahrenheit.
 #' @author A.Casanueva (22.03.2018).
 #' @details Formula based on air temperature and relative humidity, as it is calculated in Buzan et al. 2015, but adapted for degrees Celsius.
 #'  
@@ -14,13 +14,13 @@
 #' @examples \dontrun{ 
 #' # load the meteorological variables for example data in Salamanca:
 #' data("data_obs") 
-#' hi <- uhi(data_obs$tasmean, hurs=data_obs$hurs)
+#' heatindex <- hi(data_obs$tasmean, hurs=data_obs$hurs)
 #' }
 #' 
 
 
 
-uhi <- function(tas,hurs){
+hi <- function(tas,hurs){
   
   # Constants
   a <- -42.379
