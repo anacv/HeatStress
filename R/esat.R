@@ -11,10 +11,6 @@
 
 esat <- function(Tk){
   
-  # assertion statements
-  assertthat::assert_that(is.numeric(Tk), msg="'Tk' is not an integer")
-  assertthat::assert_that(Tk > 200, msg="'Tk' should be in Kelvin")
-  
   esat <- 6.1121 * exp(17.502 * (Tk - 273.15) / (Tk - 32.18))
   esat <- 1.004 * esat  #correction for moist air, if pressure is not available; for pressure > 800 mb
   

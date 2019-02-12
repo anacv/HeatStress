@@ -19,13 +19,6 @@
 #' 
 calZenith <- function(dates,lon,lat, hour=FALSE){
 
-  # assertion statements
-  assertthat::assert_that(is.numeric(lon), msg="'lon' is not an integer")
-  assertthat::assert_that(is.numeric(lat), msg="'lat' is not an integer")
-  assertthat::assert_that(is.logical(hour), msg="'hour' should be logical")
-  assertthat::assert_that(lon <= 180 & lon >=-180, msg="Invalid lon")
-  assertthat::assert_that(lat <= 90 & lon >=-90, msg="Invalid lat")
-
   # Internal constants used for conversion 
   EQTIME1 <- 229.18
   EQTIME2 <- 0.000075

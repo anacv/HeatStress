@@ -14,9 +14,7 @@
 fTg <- function(tas, relh, Pair, wind, min.speed, radiation, propDirect, 
                 zenith, SurfAlbedo=0.4, tolerance=1e-4){
 
-  # assertion statements
-  assertthat::assert_that(propDirect < 1, msg="'propDirect' should be [0,1]")  
-
+ 
   # Physical constants
   stefanb <- 0.000000056696
   cp <- 1003.5 # heat capaticy at constant pressure of dry air
@@ -67,7 +65,7 @@ fTg <- function(tas, relh, Pair, wind, min.speed, radiation, propDirect,
   }
   
   # Minimization (iteratively)
-  opt <- optimize(fr, range(Tair-2, Tair+10),Tair,Pair, tol=tolerance)
+  opt <- stats::optimize(fr, range(Tair-2, Tair+10),Tair,Pair, tol=tolerance)
   Tg <- opt$minimum - 273.15
 
   return(Tg)

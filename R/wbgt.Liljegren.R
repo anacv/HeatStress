@@ -28,24 +28,30 @@ wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, toleranc
                            noNAs=TRUE, swap=FALSE, hour=FALSE){
 
   
-
-    
-
-  # assertion statements
-  assertthat::assert_that(is.logical(hour), msg="'hour' should be logical")
-  assertthat::assert_that(is.logical(noNAs), msg="'noNAs' should be logical")
-  assertthat::assert_that(is.logical(swap), msg="'swap' should be logical")
-  assertthat::assert_that(length(tas)==length(dewp) & length(dewp)==length(wind)
-                          & length(wind)==length(radiation), 
-                          msg="Input vectors do not have the same length")
-  
-  
   ##################################################
   ##################################################
   # Assumptions
   propDirect <- 0.8  # Assume a proportion of direct radiation = direct/(diffuse + direct)
   Pair <- 1010  # Atmospheric pressure in hPa
   MinWindSpeed <- 0.1   # 0 wind speed upsets log function
+  
+  ##################################################
+  ##################################################
+  # Assertion statements
+  assertthat::assert_that(is.logical(hour), msg="'hour' should be logical")
+  assertthat::assert_that(is.logical(noNAs), msg="'noNAs' should be logical")
+  assertthat::assert_that(is.logical(swap), msg="'swap' should be logical")
+  assertthat::assert_that(length(tas)==length(dewp) & length(dewp)==length(wind)
+                          & length(wind)==length(radiation), 
+                          msg="Input vectors do not have the same length")
+  assertthat::assert_that(is.numeric(Pair), msg="'Pair' is not an integer")
+  assertthat::assert_that(is.numeric(MinWindSpeed), msg="'min.speed' is not an integer")
+  assertthat::assert_that(propDirect < 1, msg="'propDirect' should be [0,1]")  
+  assertthat::assert_that(is.numeric(lon), msg="'lon' is not an integer")
+  assertthat::assert_that(is.numeric(lat), msg="'lat' is not an integer")
+  assertthat::assert_that(lon <= 180 & lon >=-180, msg="Invalid lon")
+  assertthat::assert_that(lat <= 90 & lon >=-90, msg="Invalid lat")
+  
   ######################
   ######################
   ndates <- length(tas)
@@ -73,6 +79,7 @@ wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, toleranc
   # Calculate relative humidity from air temperature and dew point temperature
   relh <- dewp2hurs(tas,dewp) # input in degC, output in %
 
+  
   # **************************************
   # *** Calculation of the Tg and Tnwb ***
   # **************************************

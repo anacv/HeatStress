@@ -10,9 +10,6 @@
 
 radToDeg <- function(angleRad){
   
-  # assertion statements
-  assertthat::assert_that(is.numeric(angleRad), msg="'angleRad' is not an integer")
-
   radToDeg <- 180 * angleRad / pi
   return(radToDeg)
 }

@@ -13,3 +13,6 @@ Changes in version 1.0.3
   
 Changes in version 1.0.4
   * Inclusion of more heat indices.
+  
+Changes in version 1.0.5
+  * Arrange assert statments in wrapper function to speed up calculation of wbgt.Liljegren.

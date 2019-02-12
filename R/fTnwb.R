@@ -24,8 +24,6 @@
 fTnwb <- function(tas, dewp, relh, Pair, wind, min.speed, radiation, propDirect, 
                   zenith, irad=1, SurfAlbedo=0.4, tolerance=1e-4){
   
-  # assertion statements
-  assertthat::assert_that(propDirect < 1, msg="'propDirect' should be [0,1]")  
 
   # Physical constants
   stefanb <- 0.000000056696
@@ -101,7 +99,7 @@ fTnwb <- function(tas, dewp, relh, Pair, wind, min.speed, radiation, propDirect,
   }
   
   # Minimization (iteratively)
-  opt <- optimize(fr, range(Tdew-1, Tair+1),Tair,Pair, tol=tolerance)
+  opt <- stats::optimize(fr, range(Tdew-1, Tair+1),Tair,Pair, tol=tolerance)
 
   Tnwb <- opt$minimum - 273.15
 
