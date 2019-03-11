@@ -1,8 +1,8 @@
 Package: HeatStress
 Type: Package
 Title: Calculate heat stress indices
-Version: 1.0.5
-Date: 2017-03-03
+Version: 1.0.6
+Date: 2019-03-11
 Author: A. Casanueva
 Maintainer: A.Casanueva <ana.casanueva@meteoswiss.ch>
 Description: Calculate heat stress indices based on meteorological data.

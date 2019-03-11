@@ -50,7 +50,7 @@ wbgt.Liljegren <- function(tas, dewp, wind, radiation, dates, lon, lat, toleranc
   assertthat::assert_that(is.numeric(lon), msg="'lon' is not an integer")
   assertthat::assert_that(is.numeric(lat), msg="'lat' is not an integer")
   assertthat::assert_that(lon <= 180 & lon >=-180, msg="Invalid lon")
-  assertthat::assert_that(lat <= 90 & lon >=-90, msg="Invalid lat")
+  assertthat::assert_that(lat <= 90 & lat >=-90, msg="Invalid lat")
   
   ######################
   ######################
