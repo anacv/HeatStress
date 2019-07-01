@@ -23,7 +23,9 @@ library(HeatStress)
 indexShow()
 ```
 
-### Reference and further information: 
+### Reference and further information
+
+[![DOI](https://zenodo.org/badge/82677974.svg)](https://zenodo.org/badge/latestdoi/82677974)
 
 This package was used in the development of climate change scenarios of heat stress, in the following publications:
 * Casanueva et al. 2019. Climate projections of a multi-variate heat stress index: the role of downscaling and bias correction, *Geoscientific Model Development*, https://www.geosci-model-dev-discuss.net/gmd-2018-294/
