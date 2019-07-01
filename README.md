@@ -4,6 +4,8 @@
 
 **HeatStress** is a R package for the calculation of heat stress indices. It has been developed in the framework of the Horizon2020 [HEAT-SHIELD project](https://www.heat-shield.eu).
 
+[![DOI](https://zenodo.org/badge/82677974.svg)](https://zenodo.org/badge/latestdoi/82677974)
+
 ****
 
 ### Installation
