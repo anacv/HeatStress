@@ -16,3 +16,9 @@ Changes in version 1.0.4
   
 Changes in version 1.0.5
   * Arrange assert statments in wrapper function to speed up calculation of wbgt.Liljegren.
+
+Changes in version 1.0.6
+  * Correct bug in assertion statement.
+
+Changes in version 1.0.7
+  * Update README.md

@@ -4,8 +4,14 @@
 #' 
 #' The package \code{HeatStress} provides methods to calculate heat stress indices.
 #' 
-#' @name HeatStress 
-#' @docType package 
+#' Check the details of the indices and input variables: 
+#' 
+#' \code{library(HeatStress)}
+#' 
+#' \code{indexShow()}
+#' 
+#' 
+#' 
 #' @details 
 #' 
 #' The following calculation methods are implemented:
@@ -21,6 +27,9 @@
 #'  \item \code{discomInd}: Calculation of the discomfort index (Coccolo et al. 2016 and references therein).
 #'  \item \code{hi}: Calculation of the heat index (Buzan et al. 2015 and references therein).
 
-#'  } 
+#'  }
+#' @name HeatStress 
+#' @docType package 
+#'  
 NULL 
 #"_PACKAGE"

@@ -11,6 +11,12 @@ Calculate heat stress indices
 \details{
 The package \code{HeatStress} provides methods to calculate heat stress indices.
 
+Check the details of the indices and input variables:
+
+\code{library(HeatStress)}
+
+\code{indexShow()}
+
 
 
 The following calculation methods are implemented:

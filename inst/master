@@ -1,0 +1,11 @@
+code;longname;indexfun;tas;dewp;hurs;wind;radiation;units
+wbt;Wet Bulb Temperature; wbt.Stull;1;0;1;0;0;degC 
+wbgt_shade;Wet Bulb Globe Temperature (shade);wbgt.Bernard;1;1;0;0;0;degC
+wbgt_sun;Wet Bulb Globe Temperature (sun);wbgt.Liljegren;1;1;0;1;1;degC 
+swbgt;simplified wet bulb globe temperature;swbgt;1;0;1;0;0;degC
+apparentTemp;apparent temperature;apparentTemp;1;0;1;1;0;degC
+effectiveTemp;effective temperature;effectiveTemp;1;0;1;1;0;degC
+humidex;humidex;humidex;1;0;1;0;0;degC
+discomInd;discomfort index;discomInd;1;0;1;0;0;degC
+hi;heat index;hi;1;0;1;0;0;degF 
+
