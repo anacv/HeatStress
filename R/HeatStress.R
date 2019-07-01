@@ -4,13 +4,6 @@
 #' 
 #' The package \code{HeatStress} provides methods to calculate heat stress indices.
 #' 
-#' Check the details of the indices and input variables: 
-#' 
-#' \code{library(HeatStress)}
-#' 
-#' \code{indexShow()}
-#' 
-#' 
 #' 
 #' @details 
 #' 
@@ -28,6 +21,14 @@
 #'  \item \code{hi}: Calculation of the heat index (Buzan et al. 2015 and references therein).
 
 #'  }
+#'  
+#'  Check the details of the indices and input variables: 
+#' 
+#' \code{library(HeatStress)}
+#' 
+#' \code{indexShow()}
+#' 
+#' 
 #' @name HeatStress 
 #' @docType package 
 #'  

@@ -1,9 +1,8 @@
 # HeatStress
-Heat Stress indices for Heat-Shield
 
 ## What is `HeatStress`?
 
-**HeatStress** is a R package for the calculation of heat stress indices. It has been developed in the framework of the Horizon2020 [HEAT-SHIELD project](www.heat-shield.eu).
+**HeatStress** is a R package for the calculation of heat stress indices. It has been developed in the framework of the Horizon2020 [HEAT-SHIELD project](https://www.heat-shield.eu).
 
 ****
 

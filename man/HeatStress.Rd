@@ -11,12 +11,6 @@ Calculate heat stress indices
 \details{
 The package \code{HeatStress} provides methods to calculate heat stress indices.
 
-Check the details of the indices and input variables:
-
-\code{library(HeatStress)}
-
-\code{indexShow()}
-
 
 
 The following calculation methods are implemented:
@@ -32,4 +26,10 @@ The following calculation methods are implemented:
  \item \code{discomInd}: Calculation of the discomfort index (Coccolo et al. 2016 and references therein).
  \item \code{hi}: Calculation of the heat index (Buzan et al. 2015 and references therein).
  }
+ 
+ Check the details of the indices and input variables: 
+
+\code{library(HeatStress)}
+
+\code{indexShow()}
 }
