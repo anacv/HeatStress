@@ -29,4 +29,4 @@ indexShow()
 
 This package was used in the development of climate change scenarios of heat stress, in the following publications:
 * Casanueva et al. 2019. Climate projections of a multi-variate heat stress index: the role of downscaling and bias correction, *Geoscientific Model Development*, https://www.geosci-model-dev-discuss.net/gmd-2018-294/
-* Casanueva et al. 2019. Escalating environmental heat exposure – a future threat for the European workforce, *Regional Environmental Change*.
+* Casanueva et al. 2019. Escalating environmental heat exposure – a future threat for the European workforce, *Regional Environmental Change*, https://doi.org/10.1007/s10113-020-01625-6
