@@ -4,8 +4,20 @@
 \alias{fTnwb}
 \title{Calculation of the natural wet bulb temperature.}
 \usage{
-fTnwb(tas, dewp, relh, Pair, wind, min.speed, radiation, propDirect,
-  zenith, irad = 1, SurfAlbedo = 0.4, tolerance = 1e-04)
+fTnwb(
+  tas,
+  dewp,
+  relh,
+  Pair,
+  wind,
+  min.speed,
+  radiation,
+  propDirect,
+  zenith,
+  irad = 1,
+  SurfAlbedo = 0.4,
+  tolerance = 1e-04
+)
 }
 \arguments{
 \item{tas}{vector of temperature in degC.}

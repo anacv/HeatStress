@@ -18,7 +18,7 @@
 #'  \item \code{effectiveTemp}: Calculation of the effective temperature (Coccolo et al. 2016 and references therein).
 #'  \item \code{humidex}: Calculation of the humidex (Buzan et al. 2015 and references therein).
 #'  \item \code{discomInd}: Calculation of the discomfort index (Coccolo et al. 2016 and references therein).
-#'  \item \code{hi}: Calculation of the heat index (Buzan et al. 2015 and references therein).
+#'  \item \code{hi}: Calculation of the heat index (NOAA, Rothfusz 1990).
 
 #'  }
 #'  
@@ -30,7 +30,6 @@
 #' 
 #' 
 #' @name HeatStress 
-#' @docType package 
 #'  
 NULL 
 #"_PACKAGE"

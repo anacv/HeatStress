@@ -5,11 +5,13 @@
 \alias{"data_wbgt.Bernard"}
 \alias{data_wbgt.Bernard}
 \title{Example for Wet Bulb Globe Temperature in the shade (Bernard et al. 1999).}
-\format{List of two elements: 
+\format{
+List of two elements: 
 \itemize{
 \item data: numeric vector with the WBGT values in degC.
 \item Tpwb: numeric vector with the phychrometric wet bulb temperature (Tpwb) in degC.
-}}
+}
+}
 \usage{
 data_wbgt.Bernard
 }

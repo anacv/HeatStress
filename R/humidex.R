@@ -24,6 +24,7 @@ humidex <- function(tas,hurs){
 
   # assertion statements
   assertthat::assert_that(length(hurs)==length(tas), msg="Input vectors do not have the same length")
+  assertthat::assert_that(all(hurs <= 100, na.rm = TRUE), msg="Some values in hurs are greater than 100")
   
   # Calculate vapour pressure in hPa
   vp <- tashurs2vap.pres(tas, hurs)

@@ -5,12 +5,14 @@
 \alias{"data_wbgt.Liljegren"}
 \alias{data_wbgt.Liljegren}
 \title{Example for Wet Bulb Globe Temperature in the sun (Liljegren et al. 2008).}
-\format{List of three elements: 
+\format{
+List of three elements: 
 \itemize{
 \item data: numeric vector with the WBGT values in degC.
 \item Tpwb: natural wet bulb temperature (Tnwb) in degC.
 \item Tg: globe temperature in degC.
-}}
+}
+}
 \usage{
 data_wbgt.Liljegren
 }

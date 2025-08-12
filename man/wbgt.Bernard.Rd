@@ -4,8 +4,7 @@
 \alias{wbgt.Bernard}
 \title{Calculation of wet bulb globe temperature, following Bernard's method.}
 \usage{
-wbgt.Bernard(tas, dewp, tolerance = 1e-04, noNAs = TRUE,
-  swap = FALSE)
+wbgt.Bernard(tas, dewp, tolerance = 1e-04, noNAs = TRUE, swap = FALSE)
 }
 \arguments{
 \item{tas}{vector of air temperature in degC.}

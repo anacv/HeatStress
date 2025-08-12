@@ -18,7 +18,7 @@ Heat index in degrees Fahrenheit.
 Calculation of the heat index from temperature and relative humidity.
 }
 \details{
-Formula based on air temperature and relative humidity, as it is calculated in Buzan et al. 2015, but adapted for degrees Celsius.
+Formula based on air temperature and relative humidity, following Rothfusz 1990 (National Weather Service Technical Attachment, SR 90-23), but adapted for degrees Celsius. This implementation includes some adjustments for high and low relative humidity values. Also, the original formula is not appropriate for a heat index value below about 80ºF. In those cases, a simpler formula is applied to calculate values consistent with Steadman's results. See: https://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml
 }
 \examples{
 \dontrun{ 
@@ -29,5 +29,5 @@ heatindex <- hi(data_obs$tasmean, hurs=data_obs$hurs)
 
 }
 \author{
-A.Casanueva (22.03.2018).
+A.Casanueva (22.03.2018). Modified in 12.08.2025.
 }

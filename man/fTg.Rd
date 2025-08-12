@@ -4,8 +4,18 @@
 \alias{fTg}
 \title{Calculation of the globe temperature.}
 \usage{
-fTg(tas, relh, Pair, wind, min.speed, radiation, propDirect, zenith,
-  SurfAlbedo = 0.4, tolerance = 1e-04)
+fTg(
+  tas,
+  relh,
+  Pair,
+  wind,
+  min.speed,
+  radiation,
+  propDirect,
+  zenith,
+  SurfAlbedo = 0.4,
+  tolerance = 1e-04
+)
 }
 \arguments{
 \item{tas}{vector of temperature in degC.}

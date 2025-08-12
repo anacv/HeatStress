@@ -4,8 +4,19 @@
 \alias{wbgt.Liljegren}
 \title{Calculation of wet bulb globe temperature, following Liljegren's method.}
 \usage{
-wbgt.Liljegren(tas, dewp, wind, radiation, dates, lon, lat,
-  tolerance = 1e-04, noNAs = TRUE, swap = FALSE, hour = FALSE)
+wbgt.Liljegren(
+  tas,
+  dewp,
+  wind,
+  radiation,
+  dates,
+  lon,
+  lat,
+  tolerance = 1e-04,
+  noNAs = TRUE,
+  swap = FALSE,
+  hour = FALSE
+)
 }
 \arguments{
 \item{tas}{vector of temperature in degC.}

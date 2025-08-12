@@ -7,9 +7,9 @@
 dewp2hurs(tas, dewp)
 }
 \arguments{
-\item{tas}{vector of temperature in degC.}
+\item{tas:}{vector of temperature in degC}
 
-\item{dewp}{vector of dewpoint temperature in degC.}
+\item{dewp:}{vector of dewpoint temperature in degC}
 }
 \value{
 relative humidity in %
@@ -21,5 +21,5 @@ Calculation of relative humidity from temperature and dewpoint temperature.
 Formulation from Dosseger et al. 1992. Formula 99 in MCH document.
 }
 \author{
-Ana Casanueva (11.08.201)
+Ana Casanueva (11.08.2016)
 }

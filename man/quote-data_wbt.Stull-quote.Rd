@@ -5,7 +5,9 @@
 \alias{"data_wbt.Stull"}
 \alias{data_wbt.Stull}
 \title{Example for Wet Bulb Temperature (Stull 2011).}
-\format{Numeric vector with 92 values (days).}
+\format{
+Numeric vector with 92 values (days).
+}
 \usage{
 data_wbt.Stull
 }

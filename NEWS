@@ -22,3 +22,9 @@ Changes in version 1.0.6
 
 Changes in version 1.0.7
   * Update README.md
+  
+Changes in version 1.0.8
+  * Update hi.R with all adjustments in https://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml. Update also documentation.
+  * Check that relative humidity is not larger than 100 (in all indices depending on this variable).
+  * Add script to calculate dew point temperature from air temperature and relative humidity.
+  

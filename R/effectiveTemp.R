@@ -25,6 +25,7 @@ effectiveTemp <- function(tas,hurs, wind){
 
   # assertion statements
   assertthat::assert_that(length(hurs)==length(tas) & length(tas)==length(wind), msg="Input vectors do not have the same length")
+  assertthat::assert_that(all(hurs <= 100, na.rm = TRUE), msg="Some values in hurs are greater than 100")
   
   # calculation of the effective temperature
   result <- 37 - (37-tas)/(0.68 - 0.0014*hurs + 1/(1.76+ 1.4*(wind^0.75))) - 0.29 * tas * (1 - 0.01*hurs)
