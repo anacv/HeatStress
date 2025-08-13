@@ -7,7 +7,7 @@
 #' 
 #' @return Heat index in degrees Fahrenheit.
 #' @author A.Casanueva (22.03.2018). Modified in 12.08.2025.
-#' @details Formula based on air temperature and relative humidity, following Rothfusz 1990 (National Weather Service Technical Attachment, SR 90-23), but adapted for degrees Celsius. This implementation includes some adjustments for high and low relative humidity values. Also, the original formula is not appropriate for a heat index value below about 80ºF. In those cases, a simpler formula is applied to calculate values consistent with Steadman's results. See: https://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml    
+#' @details Formula based on air temperature and relative humidity, following Rothfusz 1990 (National Weather Service Technical Attachment, SR 90-23), but adapted for degrees Celsius. This implementation includes some adjustments for high and low relative humidity values. Also, the original formula is not appropriate for low temperatures and heat index values. In those cases, a simpler formula is applied to calculate values consistent with Steadman's results. See: https://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml and https://github.com/ecmwf/thermofeel/blob/master/thermofeel/thermofeel.py#L782  
 #'  
 #' @export
 #' 
@@ -21,6 +21,12 @@
 
 
 hi <- function(tas,hurs){
+  
+  # Helper to make filters NA-safe
+  safe_filter <- function(cond) {
+    cond[is.na(cond)] <- FALSE
+    cond
+  }
   
   # Constants
   a <- -42.379
@@ -40,18 +46,25 @@ hi <- function(tas,hurs){
   # Temperature to Fahrenheit
   tasf <- tas*1.8 +32
 
-  # calculation of the heat index
+  # Calculation of the heat index
+  result_simple <-  0.5*(tasf + 61.0 + ((tasf-68.0)*1.2) + (hurs*0.094)) 
   result <- a + b * tasf + c * hurs + d * tasf * hurs + e * tasf^2 + f * hurs^2 + g * tasf^2 * hurs + h * tasf * hurs^2 + i * tasf^2 * hurs^2
   
-  # Adjust values
-  for(i in 1:length(result)){
-    
-    if(!is.na(result[i])){
-      if(hurs[i]<13 & tasf[i]>=80 & tasf[i]<=112) result[i] <- result[i] - ((13-hurs[i])/4)*sqrt((17-abs(tasf[i]-95))/17)
-      if(hurs[i]>85 & tasf[i]>=80 & tasf[i]<=87) result[i] <- result[i] + ((hurs[i]-85)/10) * ((87-tasf[i])/5)
-      if(result[i]<80) result[i] <-  0.5*(tasf[i] + 61.0 + ((tasf[i]-68.0)*1.2) + (hurs[i]*0.094)) 
-    }
-  }
+  # Define filters for adjustments
+  f_adjust1 <- safe_filter((tasf >= 80) & (tasf <= 112) & (hurs <= 13))
+  f_adjust2 <- safe_filter((tasf >= 80) & (tasf <= 87) & (hurs > 85))
+  tas_filter <- safe_filter(tasf < 80)
+  hi_filter <- safe_filter(((result_simple + tasf) / 2) < 80)
   
+  # Adjustments
+  adjustment1 <- (13-hurs[f_adjust1])/4 *sqrt(17-abs(tasf[f_adjust1]-95)/17)
+  adjustment2 <- (hurs[f_adjust2]-85)/10 * ((87-tasf[f_adjust2])/5)
+  
+  # Apply adjustments
+  result[f_adjust1] <- result[f_adjust1] - adjustment1
+  result[f_adjust2] <- result[f_adjust2] + adjustment2
+  result[tas_filter] <- result_simple[tas_filter]
+  result[hi_filter] <- result_simple[hi_filter]
+
   return(result)
 }
