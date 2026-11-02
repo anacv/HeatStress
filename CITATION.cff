@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: "HeatStress"
+version: 1.0.8.4
+license: "MIT"
+type: software
+abstract: "R package for the calculation of heat stress indices."
+message: "If you use this software, please cite it as below."
+authors:
+  - given-names: Ana
+    family-names: Casanueva
+    affiliation: Santander Meteorology Group, Dept Applied Mathematics and Computer Science, Universidad de Cantabria, Santander, Spain
+    orcid: "https://orcid.org/0000-0002-7568-0229"
+keywords:
+  - heat stress
+  - human comfort
+  - HEAT-SHIELD project
